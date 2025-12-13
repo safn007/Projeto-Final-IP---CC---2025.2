@@ -1,50 +1,36 @@
 import pygame
+from src.player import Player
 
-largura = 800
-altura = 600
-janela_jogo = pygame.display.set_mode((largura, altura)) #Define o tamanho da janela do jogo
+width = 800
+height = 600
+screen = pygame.display.set_mode((width, height)) #Define o tamanho da janela do jogo
 pygame.display.set_caption("Nome do jogo") #Nome que aparece no título da janela
 
-fundo_original = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Imagem_de_fundo.png')
-fundo = pygame.transform.scale(fundo_original, (largura, altura))
+background_original = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Imagem_de_fundo.png')
+background = pygame.transform.scale(background_original, (width, height))
 
-personagem_original = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Personagem-removebg-preview.png')
-personagem = pygame.transform.scale(personagem_original, (250, 150))
+player_image = 'Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Personagem-removebg-preview.png'
+player = Player(250, 250, player_image)
 
-pos_x_jogador = 250
-pos_y_jogador = 250
-velocidade_jogador = 0.5
+# Grupo de sprites
+sprites_group = pygame.sprite.Group()
+sprites_group.add(player)
 
-direcao = pygame.math.Vector2(0, 0)
-
-rodar_jogo = True
-while rodar_jogo:
+running_game = True
+while running_game:
 
     for events in pygame.event.get():
         if events.type == pygame.QUIT:
-            rodar_jogo = False
+            running_game = False
 
-    teclas = pygame.key.get_pressed()
-    direcao.x = 0
-    direcao.y = 0
-
-    if teclas[pygame.K_w]:
-        direcao.y -= 1
-    if teclas[pygame.K_s]:
-        direcao.y += 1
-    if teclas[pygame.K_a]:
-        direcao.x -= 1
-    if teclas[pygame.K_d]:
-        direcao.x += 1
-
-    if direcao.length() > 0:
-        direcao = direcao.normalize()
-
-    pos_x_jogador += direcao.x * velocidade_jogador
-    pos_y_jogador += direcao.y * velocidade_jogador
+    # Atualiza todos os sprites do grupo
+    sprites_group.update() 
     
-    janela_jogo.blit(fundo, (0,0))
-    janela_jogo.blit(personagem, (pos_x_jogador, pos_y_jogador))
-
+    # Desenha o fundo 
+    screen.blit(background, (0, 0))
+    
+    # Desenha os sprites na janela
+    sprites_group.draw(screen)
+   
     pygame.display.update()
 
