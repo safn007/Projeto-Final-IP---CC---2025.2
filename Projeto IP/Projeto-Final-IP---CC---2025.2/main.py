@@ -14,7 +14,7 @@ personagem = pygame.transform.scale(personagem_original, (250, 150))
 
 pos_x_jogador = 250
 pos_y_jogador = 250
-velocidade_jogador = 0.35
+velocidade_jogador = 0.5
 
 direcao = pygame.math.Vector2(0, 0)
 
