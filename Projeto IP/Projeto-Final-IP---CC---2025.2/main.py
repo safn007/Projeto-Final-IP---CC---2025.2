@@ -1,19 +1,19 @@
 import pygame
+from src.mapas import Mapas 
 
-largura = 800
-altura = 600
+largura = 960
+altura = 640
 janela_jogo = pygame.display.set_mode((largura, altura)) #Define o tamanho da janela do jogo
 pygame.display.set_caption("Nome do jogo") #Nome que aparece no título da janela
 
-fundo_original = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Imagem_de_fundo.png')
-fundo = pygame.transform.scale(fundo_original, (largura, altura))
+mapas = Mapas(largura, altura)
 
 personagem_original = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Personagem-removebg-preview.png')
-personagem = pygame.transform.scale(personagem_original, (250, 150))
+personagem = pygame.transform.scale(personagem_original, (150, 90))
 
 pos_x_jogador = 250
 pos_y_jogador = 250
-velocidade_jogador = 0.5
+velocidade_jogador = 1
 
 direcao = pygame.math.Vector2(0, 0)
 
@@ -43,8 +43,12 @@ while rodar_jogo:
     pos_x_jogador += direcao.x * velocidade_jogador
     pos_y_jogador += direcao.y * velocidade_jogador
     
-    janela_jogo.blit(fundo, (0,0))
+    # controlar fase
+    mapas.desenhar(janela_jogo)
     janela_jogo.blit(personagem, (pos_x_jogador, pos_y_jogador))
+
+    pos_y_jogador = mapas.trocar_mapa(pos_y_jogador)
 
     pygame.display.update()
 
+pygame.quit()
