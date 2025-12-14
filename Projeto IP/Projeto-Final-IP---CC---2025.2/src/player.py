@@ -1,24 +1,87 @@
 import pygame
+import os
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, image_path):
+    def __init__(self, x, y):
         super().__init__()
         
-        # Carrega e transforma a imagem
-        player_image = pygame.image.load(image_path)
-        self.image = pygame.transform.scale(player_image, (250, 150))
+        # Configuracao da animacao
+        self.frame_index = 0
+        self.animation_speed = 0.15
+        self.facing = "down" # Guarda a ultima direcao
+        self.status = "idle_down" # Comeca para baixo
         
-        # Hitbox para posicionamento e colisoes
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
+        # Carrega as imagens
+        self.animations = {
+            "idle_up": [], "run_up": [],
+            "idle_down": [], "run_down": [],
+            "idle_left": [], "run_left": [],
+            "idle_right": [], "run_right": [],
+        }
+        self.import_assets() # Chama a funcao q carrega as imagens
         
-        # Posicao
-        self.pos_x = float(x)
-        self.pos_y = float(y)
+        # Imagem inicial
+        self.image = self.animations[self.status][self.frame_index]
+        self.rect = self.image.get_rect(topleft = (x, y))
         
         # Movimento
-        self.speed = 0.5
+        self.pos_x = float(x)
+        self.pos_y = float(y)
+        self.speed = 3
         self.direction = pygame.math.Vector2(0, 0)
+        
+    def import_assets(self):
+        diretory = os.path.dirname(__file__) # Pega a pasta onde o player.py ta
+        path = os.path.join(diretory, "..", "Assets", "Imagens") # Caminho ate a pasta das imagens
+        
+        def load_animation(name, frames):
+            # Recorta sprite sheets 
+            
+            caminho_completo = os.path.join(path, name)
+            # Carrega a imagem inteira
+            sheet = pygame.image.load(caminho_completo).convert_alpha()
+            
+            width_sheet = sheet.get_width()
+            height_sheet = sheet.get_height()
+            
+            # Descobre a largura de um boneco
+            frame_width = width_sheet / frames
+            
+            frame_list = []
+            
+            for i in range(frames):
+                # Define o retângulo de corte
+                # O i * frame_width faz o corte andar pra a direita
+                crop = (i * frame_width, 0, frame_width, height_sheet)
+                
+                # Cria o recorte
+                frame = sheet.subsurface(crop)
+                
+                # Redimensiona o frame
+                chosen_frame = pygame.transform.scale(frame, (250, 150))
+
+                frame_list.append(chosen_frame)
+                
+            return frame_list
+        
+        self.animations["run_up"] = load_animation('run_up.png', 8)
+        self.animations["run_down"] = load_animation('run_down.png', 8)
+        self.animations["run_left"] = load_animation('run_left.png', 8)
+        self.animations["run_right"] = load_animation('run_right.png', 8)
+        
+        self.animations["idle_up"] = load_animation('idle_up.png', 8) 
+        self.animations["idle_down"] = load_animation('idle_down.png', 8)
+        self.animations["idle_left"] = load_animation('idle_left.png', 8)
+        self.animations["idle_right"] = load_animation('idle_right.png', 8)
+
+    def get_status(self):
+        # Decide qual animacao selecionada
+        
+        # Se o vetor for (0, 0) ele ta parado
+        if self.direction.x == 0 and self.direction.y == 0:
+            self.status = "idle_" + self.facing
+        else:
+            self.status = "run_" + self.facing
         
     def input(self):
         # Teclas
@@ -26,21 +89,38 @@ class Player(pygame.sprite.Sprite):
         self.direction.x = 0
         self.direction.y = 0
         
+        # Movimento e definicao de onde olha
         if keys[pygame.K_w]:
             self.direction.y -= 1
+            self.facing = "up"
         if keys[pygame.K_s]:
             self.direction.y += 1
+            self.facing = "down"
         if keys[pygame.K_a]:
             self.direction.x -= 1
+            self.facing = "left"
         if keys[pygame.K_d]:
             self.direction.x += 1
+            self.facing = "right"
             
         # Faz nao andar mais rapido na diagonal
         if self.direction.length() > 0:
             self.direction = self.direction.normalize()
+            
+    def animate(self):
+        animation = self.animations[self.status]
+        
+        # Loop da animacao
+        self.frame_index += self.animation_speed
+        if self.frame_index >= len(animation):
+            self.frame_index = 0
+        
+        self.image = animation[int(self.frame_index)]
     
     def update(self):
         self.input() # Chama a funcao input
+        self.get_status()
+        self.animate()
         
         # Atualiza posicao
         self.pos_x += self.direction.x * self.speed
