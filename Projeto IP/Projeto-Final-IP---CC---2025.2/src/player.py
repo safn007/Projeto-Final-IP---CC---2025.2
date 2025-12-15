@@ -93,13 +93,13 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_w]:
             self.direction.y -= 1
             self.facing = "up"
-        if keys[pygame.K_s]:
+        elif keys[pygame.K_s]:
             self.direction.y += 1
             self.facing = "down"
-        if keys[pygame.K_a]:
+        elif keys[pygame.K_a]:
             self.direction.x -= 1
             self.facing = "left"
-        if keys[pygame.K_d]:
+        elif keys[pygame.K_d]:
             self.direction.x += 1
             self.facing = "right"
             
