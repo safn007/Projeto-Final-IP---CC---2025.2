@@ -44,10 +44,10 @@
 6. Divisão de trabalho 📝:
   - Samuel: Fez o README, a tela principal 
   - Guilherme: Fez o mapas.py, colisoes.py, e conectou as mudanças dos mapas com o player, 
-  - Gabriel Brum: Fez o sistema de 
-  - Gabriel Ribeiro: Fez parte dos sprites, ajudou nos slides e deu suporte no ajuste da movimentação e das fases.
-  - Eduardo: Fez parte dos sprites, os slides, o README do projeto e ajudou no desenvolivimento dos inimigos.
-  - Thiago: Fez parte dos sprites, ajudou nos slides e atuou dando suporte nos códigos.
+  - Gabriel Brum:  
+  - Gabriel Ribeiro: 
+  - Eduardo: 
+  - Thiago: 
 
 7. Conceitos de Programação utilizados 📚:
   - Programação Orientada a Objetos: Excluindo o arquivo main(), todos os outros arquivos possuem a definição de classes para instanciação no arquivo main().
