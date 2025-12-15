@@ -23,10 +23,17 @@
 
 
 4. Capturas de Tela 📸:
+    - Testando as movimentações básicas.
+        - <img width="500" height="403" alt="Captura de Tela (462)" src="https://github.com/user-attachments/assets/2c6d0b44-73b3-4a67-b494-cbd7ee49325b" />
 
+    - Testando perseguição inimigo -> player.
+        - <img width="500" height="395" alt="Captura de Tela (463)" src="https://github.com/user-attachments/assets/78541df0-e8d5-4350-b78c-9ff9fe013f87" />
+    
+    - Incluindo os sprites e o cenário.
+        - <img width="500" height="281" alt="arquivo png" src="https://github.com/user-attachments/assets/aca3b319-f1d0-4c4a-9545-1ea8bfa32c65" />
 
-
-
+    - Atualizando as sprites e o cenário / adicionando os coletáveis
+        - <img width="500" height="347" alt="Captura de Tela (464)" src="https://github.com/user-attachments/assets/15d7ba27-94ee-4ad9-b29a-d6d6f6243873" />
 
 5. Ferramentas, bibliotecas e frameworks utilizados 🛠:
   - Python 3.13.7
