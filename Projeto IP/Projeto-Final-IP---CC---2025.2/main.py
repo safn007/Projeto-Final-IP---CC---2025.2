@@ -1,22 +1,17 @@
 #teste Samuel comentário
 import pygame
+from src.mapas import Mapas
+from src.colisoes import Colisoes
 from src.coletaveis import Coletavel
-import os
 from src.player import Player
 
 pygame.init() # Inicia o pygame
 
-width = 800
-height = 600
+mapas = Mapas(largura, altura)
+width = 960
+height = 640
 screen = pygame.display.set_mode((width, height)) # Define o tamanho da janela do jogo
 pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da janela
-
-diretory = os.path.dirname(__file__)  # Pega o diretório do arquivo main.py
-path = os.path.join(diretory, "Assets", "Imagens", "Imagem_de_fundo.png")  # Caminho até a imagem de fundo
-
-# Fundo
-background_original = pygame.image.load(path).convert()
-background = pygame.transform.scale(background_original, (width, height))
 
 player = Player(250, 250)
 
@@ -60,12 +55,25 @@ while running_game:
             elif item.tipo == "carangueijo":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
+                
+    # desenha mapa
+    mapas.desenhar(screen)
+
+    # troca de mapa (altera o rect diretamente)
+    mapas.trocar_mapa(player.rect)
+
+    # sincroniza posição lógica com o rect
+    player.pos.x = player.rect.centerx
+    player.pos.y = player.rect.centery
+
+    # coletar colisões
+    colisoes = Colisoes([3, 5, 9, 11, 241])
+    colisoes = colisoes.criar_colisoes()
+    for coord in colisoes:
+        caixa = pygame.Rect(coord[0], coord[1], 32, 32)
 
     # Atualiza todos os sprites do grupo
     sprites_group.update() 
-    
-    # Desenha o fundo 
-    screen.blit(background, (0, 0))
     
     # Desenha os sprites na janela
     sprites_group.draw(screen)
