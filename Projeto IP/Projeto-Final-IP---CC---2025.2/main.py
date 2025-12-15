@@ -7,10 +7,10 @@ from src.player import Player
 
 pygame.init() # Inicia o pygame
 
+largura = 960
+altura = 640
 mapas = Mapas(largura, altura)
-width = 960
-height = 640
-screen = pygame.display.set_mode((width, height)) # Define o tamanho da janela do jogo
+tela = pygame.display.set_mode((largura, altura)) # Define o tamanho da janela do jogo
 pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da janela
 
 player = Player(250, 250)
@@ -57,14 +57,10 @@ while running_game:
                 qnt_carangueijo+=1
                 
     # desenha mapa
-    mapas.desenhar(screen)
+    mapas.desenhar(tela)
 
     # troca de mapa (altera o rect diretamente)
     mapas.trocar_mapa(player.rect)
-
-    # sincroniza posição lógica com o rect
-    player.pos.x = player.rect.centerx
-    player.pos.y = player.rect.centery
 
     # coletar colisões
     colisoes = Colisoes([3, 5, 9, 11, 241])
@@ -76,8 +72,8 @@ while running_game:
     sprites_group.update() 
     
     # Desenha os sprites na janela
-    sprites_group.draw(screen)
-    grupo_coletaveis.draw(screen) #desenha os coletaveis
+    sprites_group.draw(tela)
+    grupo_coletaveis.draw(tela) #desenha os coletaveis
    
     pygame.display.update()
 
