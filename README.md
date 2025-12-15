@@ -63,7 +63,8 @@
     - Python 3.x instalado.
     - Pygame instalado (pip install pygame).
   - Instruções:
-    - Use as teclas W, A, S, D para movimentar-se e fugir dos carangueijos defensores.
+    - Acesse nosso código em nosso repositório github: https://github.com/safn007/Projeto-Final-IP---CC---2025.2.git
+    - Use as teclas W, A, S, D para movimentar oplayer, fugir dos carangueijos defensores e coletar os itens.
 
 * BOM JOGO! SE DIVIRTA NESSA INCRÍVEL AVENTURA MANGUEBEAT!
 
