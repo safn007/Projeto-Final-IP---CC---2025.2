@@ -1,5 +1,6 @@
 #teste Samuel comentário
 import pygame
+from src.coletaveis import Coletavel
 import os
 from src.player import Player
 
@@ -19,6 +20,18 @@ background = pygame.transform.scale(background_original, (width, height))
 
 player = Player(250, 250)
 
+grupo_coletaveis = pygame.sprite.Group() #criando os coletaveis
+#adicionando no mapa
+grupo_coletaveis.add(Coletavel("chapeu", 100, 100))
+grupo_coletaveis.add(Coletavel("oculos", 150, 100))
+grupo_coletaveis.add(Coletavel("carangueijo", 600, 500))
+grupo_coletaveis.add(Coletavel("carangueijo", 400, 100))
+
+#variaveis para contagem de coletaveis
+qnt_chapeu = 0
+qnt_oculos = 0
+qnt_carangueijo = 0
+
 # Grupo de sprites
 sprites_group = pygame.sprite.Group()
 sprites_group.add(player)
@@ -32,6 +45,23 @@ while running_game:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running_game = False
+
+
+    for item in grupo_coletaveis:
+        if player_rect.colliderect(item.rect):
+            item.kill() #remove o item do jogo e do grupo
+
+            if item.tipo == "chapeu":
+                print("pegou chapeu")
+                qnt_chapeu+=1
+            elif item.tipo == "oculos":
+                print("pegou oculos")
+                qnt_oculos+=1
+            elif item.tipo == "carangueijo":
+                print("pegou carangueijo")
+                qnt_carangueijo+=1
+
+    grupo_coletaveis.draw(janela_jogo) #desenha os coletaveis
 
     # Atualiza todos os sprites do grupo
     sprites_group.update() 
