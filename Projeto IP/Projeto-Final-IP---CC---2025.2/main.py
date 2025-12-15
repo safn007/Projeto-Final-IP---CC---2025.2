@@ -1,34 +1,63 @@
+#teste Samuel comentário
 import pygame
-from src.player import Player
 from src.mapas import Mapas
 from src.colisoes import Colisoes
+from src.coletaveis import Coletavel
+from src.player import Player
 
-pygame.init()
-
-largura = 960
-altura = 640
-janela_jogo = pygame.display.set_mode((largura, altura))
-pygame.display.set_caption("Nome do jogo")
-
-clock = pygame.time.Clock()
+pygame.init() # Inicia o pygame
 
 mapas = Mapas(largura, altura)
+width = 960
+height = 640
+screen = pygame.display.set_mode((width, height)) # Define o tamanho da janela do jogo
+pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da janela
 
-player_image = 'Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Personagem-removebg-preview.png'
-player = Player(250, 250, player_image)
+player = Player(250, 250)
 
-sprites_group = pygame.sprite.Group(player)
+grupo_coletaveis = pygame.sprite.Group() #criando os coletaveis
+#adicionando no mapa
+grupo_coletaveis.add(Coletavel("chapeu", 100, 100))
+grupo_coletaveis.add(Coletavel("oculos", 150, 100))
+grupo_coletaveis.add(Coletavel("carangueijo", 600, 500))
+grupo_coletaveis.add(Coletavel("carangueijo", 400, 100))
 
+#variaveis para contagem de coletaveis
+qnt_chapeu = 0
+qnt_oculos = 0
+qnt_carangueijo = 0
+
+# Grupo de sprites
+sprites_group = pygame.sprite.Group()
+sprites_group.add(player)
+
+clock = pygame.time.Clock() # Cria relogio pra controlar FPS
 running_game = True
+
 while running_game:
-    clock.tick(60)
+    clock.tick(60) # Limita os FPS a 60
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running_game = False
 
+
+    for item in grupo_coletaveis:
+        if player.rect.colliderect(item.rect):
+            item.kill() #remove o item do jogo e do grupo
+
+            if item.tipo == "chapeu":
+                print("pegou chapeu")
+                qnt_chapeu+=1
+            elif item.tipo == "oculos":
+                print("pegou oculos")
+                qnt_oculos+=1
+            elif item.tipo == "carangueijo":
+                print("pegou carangueijo")
+                qnt_carangueijo+=1
+                
     # desenha mapa
-    mapas.desenhar(janela_jogo)
+    mapas.desenhar(screen)
 
     # troca de mapa (altera o rect diretamente)
     mapas.trocar_mapa(player.rect)
@@ -43,12 +72,13 @@ while running_game:
     for coord in colisoes:
         caixa = pygame.Rect(coord[0], coord[1], 32, 32)
 
-    # atualiza sprites
-    sprites_group.update()
-
-    # desenha sprites
-    sprites_group.draw(janela_jogo)
-
+    # Atualiza todos os sprites do grupo
+    sprites_group.update() 
+    
+    # Desenha os sprites na janela
+    sprites_group.draw(screen)
+    grupo_coletaveis.draw(screen) #desenha os coletaveis
+   
     pygame.display.update()
 
 pygame.quit()
