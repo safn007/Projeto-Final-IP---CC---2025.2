@@ -48,7 +48,7 @@ while running_game:
 
 
     for item in grupo_coletaveis:
-        if player_rect.colliderect(item.rect):
+        if player.rect.colliderect(item.rect):
             item.kill() #remove o item do jogo e do grupo
 
             if item.tipo == "chapeu":
@@ -61,8 +61,6 @@ while running_game:
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
 
-    grupo_coletaveis.draw(janela_jogo) #desenha os coletaveis
-
     # Atualiza todos os sprites do grupo
     sprites_group.update() 
     
@@ -71,6 +69,7 @@ while running_game:
     
     # Desenha os sprites na janela
     sprites_group.draw(screen)
+    grupo_coletaveis.draw(screen) #desenha os coletaveis
    
     pygame.display.update()
 
