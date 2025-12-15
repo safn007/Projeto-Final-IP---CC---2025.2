@@ -43,7 +43,7 @@ while running_game:
 
 
     for item in grupo_coletaveis:
-        if player.rect.colliderect(item.rect):
+        if player.hitbox.colliderect(item.rect):
             item.kill() #remove o item do jogo e do grupo
 
             if item.tipo == "chapeu":
