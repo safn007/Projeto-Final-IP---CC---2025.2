@@ -41,7 +41,6 @@ while running_game:
         if event.type == pygame.QUIT:
             running_game = False
 
-
     for item in grupo_coletaveis:
         if player.rect.colliderect(item.rect):
             item.kill() #remove o item do jogo e do grupo
@@ -62,18 +61,43 @@ while running_game:
     # troca de mapa (altera o rect diretamente)
     mapas.trocar_mapa(player.rect)
 
-    # coletar colisões
-    colisoes = Colisoes([3, 5, 9, 11, 241])
-    colisoes = colisoes.criar_colisoes()
-    for coord in colisoes:
-        caixa = pygame.Rect(coord[0], coord[1], 32, 32)
-
     # Atualiza todos os sprites do grupo
     sprites_group.update() 
     
     # Desenha os sprites na janela
     sprites_group.draw(tela)
     grupo_coletaveis.draw(tela) #desenha os coletaveis
+    
+    # cria colisoes
+    colisoes = mapas.get_colisoes()
+    colisoes = Colisoes(colisoes)
+    colisoes = colisoes.criar_colisoes()
+    lista_caixas = []
+    for coord in colisoes:
+        caixa = pygame.Rect(coord[0], coord[1], 32, 32)
+        pygame.draw.rect(tela, '#ff0000', caixa, 1)
+        lista_caixas.append(caixa)
+
+    for caixa in lista_caixas:
+        if player.rect.colliderect(caixa):
+            if player.direction.x > 0:
+                player.rect.right = caixa.left
+                player.pos_x = player.rect.x  # Atualiza a posição float também!
+
+            # Se o jogador estava indo para a ESQUERDA
+            elif player.direction.x < 0:
+                player.rect.left = caixa.right
+                player.pos_x = player.rect.x
+
+            # Se o jogador estava indo para BAIXO
+            elif player.direction.y > 0:
+                player.rect.bottom = caixa.top
+                player.pos_y = player.rect.y
+
+            # Se o jogador estava indo para CIMA
+            elif player.direction.y < 0:
+                player.rect.top = caixa.bottom
+                player.pos_y = player.rect.y
    
     pygame.display.update()
 

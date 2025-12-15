@@ -6,8 +6,8 @@ class Colisoes:
 
     def coletar_xy(self, num):
         num -= 1
-        x = num % 16
-        y = int(num / 16)
+        x = num % 30
+        y = int(num / 30)
         return (x * 32, y * 32)
 
     def criar_colisoes(self):
@@ -18,5 +18,3 @@ class Colisoes:
             coords.append(coord)
 
         return coords
-
-
