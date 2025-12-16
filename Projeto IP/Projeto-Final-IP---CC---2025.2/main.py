@@ -78,27 +78,25 @@ while running_game:
         pygame.draw.rect(tela, '#ff0000', caixa, 1)
         lista_caixas.append(caixa)
 
+    # ---------- COLISÃO NO EIXO X ----------
     for caixa in lista_caixas:
-        if player.rect.colliderect(caixa):
+        if player.hitbox.colliderect(caixa):
             if player.direction.x > 0:
-                player.rect.right = caixa.left
-                player.pos_x = player.rect.x  # Atualiza a posição float também!
-
-            # Se o jogador estava indo para a ESQUERDA
+                player.hitbox.right = caixa.left
             elif player.direction.x < 0:
-                player.rect.left = caixa.right
-                player.pos_x = player.rect.x
+                player.hitbox.left = caixa.right
+            player.pos_x = player.hitbox.centerx
 
-            # Se o jogador estava indo para BAIXO
-            elif player.direction.y > 0:
-                player.rect.bottom = caixa.top
-                player.pos_y = player.rect.y
-
-            # Se o jogador estava indo para CIMA
+    # ---------- COLISÃO NO EIXO Y ----------
+    for caixa in lista_caixas:
+        if player.hitbox.colliderect(caixa):
+            if player.direction.y > 0:
+                player.hitbox.bottom = caixa.top
             elif player.direction.y < 0:
-                player.rect.top = caixa.bottom
-                player.pos_y = player.rect.y
+                player.hitbox.top = caixa.bottom
+            player.pos_y = player.hitbox.centery
    
+    pygame.draw.rect(tela, '#ff0000', player.hitbox, 1)
     pygame.display.update()
 
 pygame.quit()
