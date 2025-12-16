@@ -23,6 +23,7 @@ class Player(pygame.sprite.Sprite):
         # Imagem inicial
         self.image = self.animations[self.status][self.frame_index]
         self.rect = self.image.get_rect(topleft = (x, y))
+        self.hitbox = self.rect.inflate(-200, -100) # Reduz o hitbox do jogador
         
         # Movimento
         self.pos_x = float(x)
@@ -93,13 +94,13 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_w]:
             self.direction.y -= 1
             self.facing = "up"
-        if keys[pygame.K_s]:
+        elif keys[pygame.K_s]:
             self.direction.y += 1
             self.facing = "down"
-        if keys[pygame.K_a]:
+        elif keys[pygame.K_a]:
             self.direction.x -= 1
             self.facing = "left"
-        if keys[pygame.K_d]:
+        elif keys[pygame.K_d]:
             self.direction.x += 1
             self.facing = "right"
             
@@ -129,5 +130,7 @@ class Player(pygame.sprite.Sprite):
         # Atualiza o rect -> que é o que o Pygame desenha na tela
         self.rect.x = int(self.pos_x)
         self.rect.y = int(self.pos_y)
+        
+        self.hitbox.center = self.rect.center
     
         
