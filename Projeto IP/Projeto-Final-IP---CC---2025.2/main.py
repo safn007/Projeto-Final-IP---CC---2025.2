@@ -4,6 +4,7 @@ from src.mapas import Mapas
 from src.colisoes import Colisoes
 from src.coletaveis import Coletavel
 from src.player import Player
+from src.inimigo import Inimigo #
 
 pygame.init() # Inicia o pygame
 
@@ -14,6 +15,12 @@ tela = pygame.display.set_mode((largura, altura)) # Define o tamanho da janela d
 pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da janela
 
 player = Player(250, 250)
+player.vida = 100 #Definindo vida para o player 
+
+#criando grupo de inimigos e adicionando um
+grupo_inimigos = pygame.sprite.Group()
+inimigo_teste = Inimigo(600, 300)
+grupo_inimigos.add(inimigo_teste)
 
 grupo_coletaveis = pygame.sprite.Group() #criando os coletaveis
 #adicionando no mapa
@@ -31,6 +38,7 @@ qnt_carangueijo = 0
 sprites_group = pygame.sprite.Group()
 sprites_group.add(player)
 
+
 clock = pygame.time.Clock() # Cria relogio pra controlar FPS
 running_game = True
 
@@ -41,6 +49,13 @@ while running_game:
         if event.type == pygame.QUIT:
             running_game = False
 
+    #Lógica de Game Over simples
+    if player.vida <= 0:
+        print("GAME OVER")
+        running_game = False
+
+    #Atualiza inimigos passando o player (para eles saberem quem perseguir)
+    grupo_inimigos.update(player)
 
     for item in grupo_coletaveis:
         if player.hitbox.colliderect(item.rect):
@@ -67,13 +82,15 @@ while running_game:
     colisoes = colisoes.criar_colisoes()
     for coord in colisoes:
         caixa = pygame.Rect(coord[0], coord[1], 32, 32)
+        # Adicionar colisão do inimigo com paredes aqui futuramente
 
-    # Atualiza todos os sprites do grupo
+    #atualiza todos os sprites do grupo do player
     sprites_group.update() 
     
     # Desenha os sprites na janela
     sprites_group.draw(tela)
     grupo_coletaveis.draw(tela) #desenha os coletaveis
+    grupo_inimigos.draw(tela)   #Desenha os inimigos
    
     pygame.display.update()
 
