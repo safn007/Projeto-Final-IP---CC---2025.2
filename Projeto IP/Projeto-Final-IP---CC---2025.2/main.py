@@ -88,9 +88,9 @@ while running_game:
                 
     # desenha mapa
     mapas.desenhar(tela)
-
-    # troca de mapa 
-    mapas.trocar_mapa(player.rect)
+    
+    # troca de mapa (altera o rect diretamente)
+    mapas.trocar_mapa(player)
 
     # coletar colisões
     colisoes = Colisoes([3, 5, 9, 11, 241])

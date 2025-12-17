@@ -24,25 +24,28 @@ class Mapas:
         elif self.mapa_atual == 3:
             tela.blit(self.mapa3, (0, 0))
 
-    def trocar_mapa(self, retangulo):
+    def trocar_mapa(self, player):
 
         if self.mapa_atual == 1:
-            if retangulo.top > self.altura:
+            if player.rect.top > self.altura:
                 self.mapa_atual = 2
-                retangulo.y = 0
+                player.rect.y = 0
+                player.pos_y = 0.0
 
         elif self.mapa_atual == 2:
-            if retangulo.bottom < 0:
+            if player.rect.bottom < 0:
                 self.mapa_atual = 1
-                retangulo.y = self.altura
+                player.rect.y = self.altura - player.rect.height
+                player.pos_y = float(player.rect.y)
 
-            elif retangulo.left > self.largura:
+            elif player.rect.left > self.largura:
                 self.mapa_atual = 3
-                retangulo.x = -60
+                player.rect.x = 0
+                player.pos_x = 0.0
 
         elif self.mapa_atual == 3:
-            if retangulo.right < 0:
+            if player.rect.right < 0:
                 self.mapa_atual = 2
-                retangulo.x = self.largura - 100
+                player.rect.x = self.largura - player.rect.width
+                player.pos_x = float(player.rect.x)
 
-        return retangulo
