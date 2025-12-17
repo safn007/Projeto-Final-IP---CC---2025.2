@@ -27,6 +27,7 @@ grupo_coletaveis.add(Coletavel("carangueijo", 400, 100))
 qnt_chapeu = 0
 qnt_oculos = 0
 qnt_carangueijo = 0
+qnt_vidas = 3
 
 # Grupo de sprites
 sprites_group = pygame.sprite.Group()
@@ -83,7 +84,7 @@ while running_game:
     grupo_coletaveis.draw(tela) #desenha os coletaveis
 
     # HUD dos coletaveis
-    hud.desenhar_hud(tela, qnt_chapeu, qnt_oculos, qnt_carangueijo)
+    hud.desenhar_hud(tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, qnt_vidas)
 
     pygame.display.update()
 

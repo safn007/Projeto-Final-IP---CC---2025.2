@@ -14,6 +14,10 @@ class interface():
 
         img_carangueijo = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Pata-Carangueijo.png')
         self.icone_carangueijo = pygame.transform.scale(img_carangueijo, (25.5, 48))
+
+        img_vida = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/vida-jogador.png')
+        self.icone_vida = pygame.transform.scale(img_vida, (33, 31.5))
+
         # Cores
         self.BRANCO = (255, 255, 255)
         self.PRETO = (0, 0, 0)
@@ -34,7 +38,7 @@ class interface():
         img_texto = self.fonte.render(texto, False, self.BRANCO)
         tela.blit(img_texto, (x, y))
 
-    def desenhar_hud(self, tela, qnt_chapeu, qnt_oculos, qnt_carangueijo):
+    def desenhar_hud(self, tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, qnt_vidas):
         # --- ITEM 1: CHAPÉU ---
         tela.blit(self.icone_chapeu, (15, 15)) # Desenha ícone
         self._desenhar_texto_com_borda(tela, f"x {qnt_chapeu}", 60, 15) # Desenha texto
@@ -46,3 +50,7 @@ class interface():
         # --- ITEM 3: CARANGUEIJO ---
         tela.blit(self.icone_carangueijo, (235, 12))
         self._desenhar_texto_com_borda(tela, f"x {qnt_carangueijo}", 270, 15)
+
+        # --- ITEM 4: VIDAS ---
+        tela.blit(self.icone_vida, (850, 13))
+        self._desenhar_texto_com_borda(tela, f"x {qnt_vidas}", 895, 15)
