@@ -90,9 +90,9 @@ while running_game:
                 
     # desenha mapa
     mapas.desenhar(tela)
-
+    
     # troca de mapa (altera o rect diretamente)
-    mapas.trocar_mapa(player.rect)
+    mapas.trocar_mapa(player)
 
     # coletar colisões
     colisoes = Colisoes([3, 5, 9, 11, 241])
@@ -110,7 +110,7 @@ while running_game:
     grupo_inimigos.draw(tela) #Desenha os inimigos
     
     # HUD dos coletaveis
-    hud.desenhar_hud(tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, qnt_vidas)
+    hud.desenhar_hud(tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, player.vida)
    
     pygame.display.update()
 

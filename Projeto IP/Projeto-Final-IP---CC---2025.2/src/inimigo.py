@@ -107,7 +107,7 @@ class Inimigo(pygame.sprite.Sprite):
             self.image = self.animacao_atual[0] 
 
         # 4. Ataque
-        if self.hitbox.colliderect(player.rect):
+        if self.hitbox.colliderect(player.hitbox):
             agora = pygame.time.get_ticks()
             if agora - self.ultimo_ataque > 1000: # 1 segundo de cooldown
                 self.ultimo_ataque = agora
