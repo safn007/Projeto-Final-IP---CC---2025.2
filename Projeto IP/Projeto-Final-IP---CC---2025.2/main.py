@@ -4,6 +4,7 @@ from src.mapas import Mapas
 from src.colisoes import Colisoes
 from src.coletaveis import Coletavel
 from src.player import Player
+from src.inimigo import Inimigo 
 from src.interface import interface
 
 pygame.init() # Inicia o pygame
@@ -15,9 +16,25 @@ tela = pygame.display.set_mode((largura, altura)) # Define o tamanho da janela d
 pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da janela
 
 player = Player(250, 250)
+player.vida = 3 # Começa com 3 corações
+
+# --- Criando grupo de inimigos espalhados ---
+grupo_inimigos = pygame.sprite.Group()
+
+posicoes_inimigos = [
+    (600, 300), 
+    (800, 100), 
+    (150, 500), 
+    (850, 550) 
+]
+
+for pos in posicoes_inimigos:
+    # Cria um inimigo para cada posição e adiciona ao grupo
+    inimigo = Inimigo(pos[0], pos[1])
+    grupo_inimigos.add(inimigo)
+# --------------------------------------------
 
 grupo_coletaveis = pygame.sprite.Group() #criando os coletaveis
-#adicionando no mapa
 grupo_coletaveis.add(Coletavel("chapeu", 100, 100))
 grupo_coletaveis.add(Coletavel("oculos", 150, 100))
 grupo_coletaveis.add(Coletavel("carangueijo", 600, 500))
@@ -49,10 +66,17 @@ while running_game:
         if event.type == pygame.QUIT:
             running_game = False
 
+    # Lógica de Game Over simples (Acabou os corações)
+    if player.vida <= 0:
+        print("GAME OVER")
+        running_game = False
+
+    # Atualiza inimigos passando o player
+    grupo_inimigos.update(player)
 
     for item in grupo_coletaveis:
         if player.hitbox.colliderect(item.rect):
-            item.kill() #remove o item do jogo e do grupo
+            item.kill() # remove o item do jogo e do grupo
 
             if item.tipo == "chapeu":
                 print("pegou chapeu")
@@ -63,7 +87,7 @@ while running_game:
             elif item.tipo == "carangueijo":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
-
+                
     # desenha mapa
     mapas.desenhar(tela)
 
@@ -75,17 +99,19 @@ while running_game:
     colisoes = colisoes.criar_colisoes()
     for coord in colisoes:
         caixa = pygame.Rect(coord[0], coord[1], 32, 32)
+        # Adicionar colisão do inimigo com paredes aqui futuramente
 
-    # Atualiza todos os sprites do grupo
+    #atualiza todos os sprites do grupo do player
     sprites_group.update() 
     
     # Desenha os sprites na janela
     sprites_group.draw(tela)
     grupo_coletaveis.draw(tela) #desenha os coletaveis
-
+    grupo_inimigos.draw(tela) #Desenha os inimigos
+    
     # HUD dos coletaveis
     hud.desenhar_hud(tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, qnt_vidas)
-
+   
     pygame.display.update()
 
 pygame.quit()
