@@ -4,6 +4,7 @@ from src.mapas import Mapas
 from src.colisoes import Colisoes
 from src.coletaveis import Coletavel
 from src.player import Player
+from src.interface import interface
 
 pygame.init() # Inicia o pygame
 
@@ -26,6 +27,7 @@ grupo_coletaveis.add(Coletavel("carangueijo", 400, 100))
 qnt_chapeu = 0
 qnt_oculos = 0
 qnt_carangueijo = 0
+qnt_vidas = 3
 
 # Grupo de sprites
 sprites_group = pygame.sprite.Group()
@@ -33,6 +35,12 @@ sprites_group.add(player)
 
 clock = pygame.time.Clock() # Cria relogio pra controlar FPS
 running_game = True
+
+# Inicializa o sistema de fontes
+pygame.font.init() 
+
+# Cria o HUD dos coletaveis
+hud = interface()
 
 while running_game:
     clock.tick(60) # Limita os FPS a 60
@@ -55,7 +63,7 @@ while running_game:
             elif item.tipo == "carangueijo":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
-                
+
     # desenha mapa
     mapas.desenhar(tela)
 
@@ -74,7 +82,10 @@ while running_game:
     # Desenha os sprites na janela
     sprites_group.draw(tela)
     grupo_coletaveis.draw(tela) #desenha os coletaveis
-   
+
+    # HUD dos coletaveis
+    hud.desenhar_hud(tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, qnt_vidas)
+
     pygame.display.update()
 
 pygame.quit()
