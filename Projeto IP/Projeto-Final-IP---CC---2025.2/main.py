@@ -1,4 +1,4 @@
-#teste Samuel comentário
+#teste Samuel comentárioaaw
 import pygame
 from src.mapas import Mapas
 from src.colisoes import Colisoes
@@ -18,7 +18,7 @@ pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da jane
 player = Player(250, 250)
 player.vida = 3 # Começa com 3 corações
 
-# --- Criando grupo de inimigos espalhados ---
+# Criando grupo de inimigos espalhados
 grupo_inimigos = pygame.sprite.Group()
 
 posicoes_inimigos = [
@@ -32,19 +32,17 @@ for pos in posicoes_inimigos:
     # Cria um inimigo para cada posição e adiciona ao grupo
     inimigo = Inimigo(pos[0], pos[1])
     grupo_inimigos.add(inimigo)
-# --------------------------------------------
 
-grupo_coletaveis = pygame.sprite.Group() #criando os coletaveis
+grupo_coletaveis = pygame.sprite.Group() # criando os coletaveis
 grupo_coletaveis.add(Coletavel("chapeu", 100, 100))
 grupo_coletaveis.add(Coletavel("oculos", 150, 100))
 grupo_coletaveis.add(Coletavel("carangueijo", 600, 500))
 grupo_coletaveis.add(Coletavel("carangueijo", 400, 100))
 
-#variaveis para contagem de coletaveis
+# variaveis para contagem de coletaveis
 qnt_chapeu = 0
 qnt_oculos = 0
 qnt_carangueijo = 0
-qnt_vidas = 3
 
 # Grupo de sprites
 sprites_group = pygame.sprite.Group()
@@ -66,7 +64,7 @@ while running_game:
         if event.type == pygame.QUIT:
             running_game = False
 
-    # Lógica de Game Over simples (Acabou os corações)
+    # Lógica de Game Over 
     if player.vida <= 0:
         print("GAME OVER")
         running_game = False

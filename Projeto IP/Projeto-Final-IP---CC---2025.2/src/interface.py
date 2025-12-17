@@ -2,7 +2,7 @@ import pygame
 
 class interface():
     def __init__(self):
-        # Carrega a Fonte (ajuste o caminho se necessário)
+        # Carrega a Fonte 
         self.fonte = pygame.font.Font('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Fontes/MONOCRAFT.TTC', 23)
         
         # Carrega as Imagens dos ícones
@@ -39,18 +39,18 @@ class interface():
         tela.blit(img_texto, (x, y))
 
     def desenhar_hud(self, tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, qnt_vidas):
-        # --- ITEM 1: CHAPÉU ---
+        # Chapéu
         tela.blit(self.icone_chapeu, (15, 15)) # Desenha ícone
         self._desenhar_texto_com_borda(tela, f"x {qnt_chapeu}", 60, 15) # Desenha texto
 
-        # --- ITEM 2: ÓCULOS ---
+        # Óculos
         tela.blit(self.icone_oculos, (120, 20))
         self._desenhar_texto_com_borda(tela, f"x {qnt_oculos}", 175, 15) 
 
-        # --- ITEM 3: CARANGUEIJO ---
+        # Caranguejo
         tela.blit(self.icone_carangueijo, (235, 12))
         self._desenhar_texto_com_borda(tela, f"x {qnt_carangueijo}", 270, 15)
 
-        # --- ITEM 4: VIDAS ---
+        # Vidas
         tela.blit(self.icone_vida, (850, 13))
         self._desenhar_texto_com_borda(tela, f"x {qnt_vidas}", 895, 15)
