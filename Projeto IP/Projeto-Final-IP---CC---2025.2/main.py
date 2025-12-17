@@ -4,6 +4,7 @@ from src.mapas import Mapas
 from src.colisoes import Colisoes
 from src.coletaveis import Coletavel
 from src.player import Player
+from src.interface import interface
 
 pygame.init() # Inicia o pygame
 
@@ -34,19 +35,11 @@ sprites_group.add(player)
 clock = pygame.time.Clock() # Cria relogio pra controlar FPS
 running_game = True
 
-pygame.font.init() # Inicializa o sistema de fontes
-fonte_jogo = pygame.font.SysFont('Monocraft', 23, bold=True)
-cor_texto = (255, 255, 255) # Branco (R, G, B)
+# Inicializa o sistema de fontes
+pygame.font.init() 
 
-# Carregando UI dos coletaveis
-img_chapeu_ui = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Chapeu-Chico-Science.png') # Coloque o caminho certo aqui
-img_chapeu_ui = pygame.transform.scale(img_chapeu_ui, (39, 31.5))
-
-img_oculos_ui = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Oculos-Chico-Science.png')
-img_oculos_ui = pygame.transform.scale(img_oculos_ui, (48, 24))
-
-img_carangueijo_ui = pygame.image.load("Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/Pata-Carangueijo.png")
-img_carangueijo_ui = pygame.transform.scale(img_carangueijo_ui, (25.5, 48))
+# Cria o HUD dos coletaveis
+hud = interface()
 
 while running_game:
     clock.tick(60) # Limita os FPS a 60
@@ -69,10 +62,6 @@ while running_game:
             elif item.tipo == "carangueijo":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
-    
-    chapeus = fonte_jogo.render(f"Chapéus: {qnt_chapeu}", True, cor_texto)
-    oculos = fonte_jogo.render(f"Óculos: {qnt_oculos}", True, cor_texto)
-    carangueijo = fonte_jogo.render(f"Carangueijos: {qnt_carangueijo}", True, cor_texto)
 
     # desenha mapa
     mapas.desenhar(tela)
@@ -93,21 +82,9 @@ while running_game:
     sprites_group.draw(tela)
     grupo_coletaveis.draw(tela) #desenha os coletaveis
 
+    # HUD dos coletaveis
+    hud.desenhar_hud(tela, qnt_chapeu, qnt_oculos, qnt_carangueijo)
 
-    # UI dos coletaveis
-    tela.blit(img_chapeu_ui, (15, 15))
-    texto_chapeu = fonte_jogo.render(f"x {qnt_chapeu}", False, cor_texto)
-    tela.blit(texto_chapeu, (60, 15))
-
-    tela.blit(img_oculos_ui, (120, 20))
-    texto_oculos = fonte_jogo.render(f"x {qnt_oculos}", False, cor_texto)
-    tela.blit(texto_oculos, (175, 15))
-
-    tela.blit(img_carangueijo_ui, (235, 12))
-    texto_carangueijo = fonte_jogo.render(f"x {qnt_carangueijo}", False, cor_texto)
-    tela.blit(texto_carangueijo, (270, 15))
-    
-   
     pygame.display.update()
 
 pygame.quit()
