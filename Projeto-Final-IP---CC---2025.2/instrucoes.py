@@ -2,7 +2,7 @@ import pygame
 import sys
 import os
 images_path_base = os.path.join("Assets", "Imagens")
-
+#salvando mundanças instruções
 def mostrar_instrucao():
     pygame.init()
     LARGURA, ALTURA = 960, 640

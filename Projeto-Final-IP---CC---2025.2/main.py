@@ -5,7 +5,7 @@ from src.mapas import Mapas
 from src.colisoes import Colisoes
 from src.coletaveis import Coletavel
 from src.player import Player
-
+#salvando mudanças na main
 def executar_jogo():
     pygame.init() # Inicia o pygame
 

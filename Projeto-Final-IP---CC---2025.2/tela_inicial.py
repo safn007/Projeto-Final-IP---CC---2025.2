@@ -1,6 +1,6 @@
 import pygame
 import os
-
+#salvando mudança
 
 images_path_base = os.path.join("Assets", "Imagens")
 
