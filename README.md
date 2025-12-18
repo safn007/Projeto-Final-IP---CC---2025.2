@@ -47,7 +47,7 @@
   - Gabriel Brum:  
   - Gabriel Ribeiro: Fez o player.py e a movimentação do jogador
   - Eduardo: 
-  - Thiago: 
+  - Thiago: Fez main_2.py e sprites do Sprites-possíveis.
 
 7. Conceitos de Programação utilizados 📚:
   - Programação Orientada a Objetos: Excluindo o arquivo main(), todos os outros arquivos possuem a definição de classes para instanciação no arquivo main().
