@@ -39,7 +39,7 @@
   - Python 3.13.7
   - Biblioteca Pygame : biblioteca principal usada para renderização, eventos e lógica do jogo.
     - Justificativa do uso:
-    O pygame possui umna ampla gama de informações de uso, além de lidar com os aspectos mais complexos de baixo nível, permitindo que você se concentre nos conceitos fundamentais de desenvolvimento de jogos, como game loop, detecção de colisão, gerenciamento de sprites e estados do jogo.
+    O pygame possui uma ampla gama de informações de uso, além de lidar com os aspectos mais complexos de baixo nível, permitindo que você se concentre nos conceitos fundamentais de desenvolvimento de jogos, como game loop, detecção de colisão, gerenciamento de sprites e estados do jogo.
 
 6. Divisão de trabalho 📝:
   - Samuel: Fez o README, a tela principal 
