@@ -48,7 +48,7 @@ class Inimigo(pygame.sprite.Sprite):
 
         # Hitbox menor para bater só de perto
         self.rect = self.image.get_rect(topleft = (x, y))
-        self.hitbox = self.rect.inflate(1, 1)
+        self.hitbox = self.rect.inflate(-20, -20)
 
         # Status
         self.velocidade = 0.9 

@@ -14,21 +14,25 @@ class Mapas:
         self.mapa2 = pygame.image.load(os.path.join(imagens_path, 'mapa_2.png'))
         self.mapa3 = pygame.image.load(os.path.join(imagens_path, 'mapa_3.png'))
         self.mapa4 = pygame.image.load(os.path.join(imagens_path, 'mapa_4.png'))
+        self.mapa5 = pygame.image.load(os.path.join(imagens_path, 'mapa_5.png'))
 
         self.mapa1_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_1_arvores.png'))
         self.mapa2_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_2_arvores.png'))
         self.mapa3_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_3_arvores.png'))
         self.mapa4_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_4_arvores.png'))
+        self.mapa5_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_5_arvores.png'))
 
         self.mapa1 = pygame.transform.scale(self.mapa1, (largura, altura))
         self.mapa2 = pygame.transform.scale(self.mapa2, (largura, altura))
         self.mapa3 = pygame.transform.scale(self.mapa3, (largura, altura))
         self.mapa4 = pygame.transform.scale(self.mapa4, (largura, altura))
+        self.mapa5 = pygame.transform.scale(self.mapa5, (largura, altura))
 
         self.mapa1_arvores = pygame.transform.scale(self.mapa1_arvores, (largura, altura))
         self.mapa2_arvores = pygame.transform.scale(self.mapa2_arvores, (largura, altura))
         self.mapa3_arvores = pygame.transform.scale(self.mapa3_arvores, (largura, altura))
         self.mapa4_arvores = pygame.transform.scale(self.mapa4_arvores, (largura, altura))
+        self.mapa5_arvores = pygame.transform.scale(self.mapa5_arvores, (largura, altura))    
 
         # mapa inicial
         self.mapa_atual = 1
@@ -52,6 +56,9 @@ class Mapas:
                 (100, 100),
                 (300, 300)
             ]
+
+        elif self.mapa_atual == 5:
+            pos_inimigos = []
             
         return pos_inimigos
 
@@ -90,6 +97,14 @@ class Mapas:
 
             # desenha o mapa
             tela.blit(self.mapa4, (0, 0))
+
+        elif self.mapa_atual == 5:
+            # posiciona os coletáveis
+            if coletado == False and c3_coletado == False:
+                grupo_coletaveis.add(Coletavel("carangueijo3", 300, 500))
+
+            # desenha o mapa
+            tela.blit(self.mapa5, (0, 0))
         
         # retorna os coletaveis e os inimigos
         return grupo_coletaveis
@@ -104,6 +119,8 @@ class Mapas:
              tela.blit(self.mapa3_arvores, (0, 0))
         elif self.mapa_atual == 4:
              tela.blit(self.mapa4_arvores, (0, 0))
+        elif self.mapa_atual == 5:
+             tela.blit(self.mapa5_arvores, (0, 0))
 
     # lógica de troca de mapas
     def trocar_mapa(self, player):
@@ -135,8 +152,19 @@ class Mapas:
                 player.pos_y = 0.0
                 player.rect.y = int(player.pos_y)
 
+            elif player.rect.bottom < 0:
+                self.mapa_atual = 5
+                player.rect.y = self.altura - player.rect.height
+                player.pos_y = float(player.rect.y)
+
         elif self.mapa_atual == 4:
             if player.rect.bottom < 0:
                 self.mapa_atual = 3
                 player.rect.y = self.altura - player.rect.height
                 player.pos_y = float(player.rect.y)
+
+        elif self.mapa_atual == 5:
+            if player.rect.top > self.altura:
+                self.mapa_atual = 3
+                player.pos_y = 0.0
+                player.rect.y = int(player.pos_y)
