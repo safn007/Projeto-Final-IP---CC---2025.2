@@ -22,31 +22,11 @@ pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da jane
 player = Player(250, 250)
 player.vida = 3 # Começa com 3 corações
 
-# Criando grupo de inimigos espalhados
-grupo_inimigos = pygame.sprite.Group()
-
-posicoes_inimigos = [
-    (600, 300), 
-    (800, 100), 
-    (150, 500), 
-    (850, 550) 
-]
-
-for pos in posicoes_inimigos:
-    # Cria um inimigo para cada posição e adiciona ao grupo
-    inimigo = Inimigo(pos[0], pos[1])
-    grupo_inimigos.add(inimigo)
-
-grupo_coletaveis = pygame.sprite.Group() # criando os coletaveis
-grupo_coletaveis.add(Coletavel("chapeu", 100, 100))
-grupo_coletaveis.add(Coletavel("oculos", 150, 100))
-grupo_coletaveis.add(Coletavel("carangueijo", 600, 500))
-grupo_coletaveis.add(Coletavel("carangueijo", 400, 100))
-
 # variaveis para contagem de coletaveis
 qnt_chapeu = 0
 qnt_oculos = 0
 qnt_carangueijo = 0
+coletado, chapeu_coletado, oculos_coletado = False, False, False
 
 # Grupo de sprites
 sprites_group = pygame.sprite.Group()
@@ -61,6 +41,9 @@ pygame.font.init()
 # Cria o HUD dos coletaveis
 hud = interface()
 
+# variável para inicializar os mapas
+inicializar = True
+
 while running_game:
     clock.tick(60) # Limita os FPS a 60
 
@@ -73,34 +56,54 @@ while running_game:
         print("GAME OVER")
         running_game = False
 
-    # Atualiza inimigos passando o player
-    grupo_inimigos.update(player)
+    # desenha mapa
+    pos_coletaveis = mapas.desenhar(tela, coletado, chapeu_coletado, oculos_coletado)
 
-    for item in grupo_coletaveis:
+    # troca de mapa/ inicializa colisões e inimigos
+    mapa_antigo = mapas.mapa_atual
+    mapas.trocar_mapa(player)
+    if mapa_antigo != mapas.mapa_atual or inicializar == True:
+        coletado = False       
+        inicializar = False
+        # coletar colisões
+        atual = mapas.mapa_atual
+        colisoes = Colisoes([])
+        colisoes = colisoes.lista_colisoes(atual)
+        player.colisoes = colisoes  
+
+        pos_inimigos = mapas.get_inimigos()
+        grupo_inimigos = pygame.sprite.Group() 
+        for pos in pos_inimigos:
+            # Cria um inimigo para cada posição e adiciona ao grupo
+            inimigo = Inimigo(pos[0], pos[1])
+            grupo_inimigos.add(inimigo)
+
+    # lógica de coleta de itens
+    for item in pos_coletaveis:
         if player.hitbox.colliderect(item.rect):
             item.kill() # remove o item do jogo e do grupo
-
+            
             if item.tipo == "chapeu":
                 print("pegou chapeu")
                 qnt_chapeu+=1
+                coletado = True
+                chapeu_coletado = True
+
             elif item.tipo == "oculos":
                 print("pegou oculos")
                 qnt_oculos+=1
+                coletado = True
+                oculos_coletado = True
+
             elif item.tipo == "carangueijo":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
-                
-    # desenha mapa
-    mapas.desenhar(tela)
-    
-    # troca de mapa (altera o rect diretamente)
-    mapas.trocar_mapa(player)
+                coletado = True
 
-    # coletar colisões
-    colisoes = Colisoes([3, 5, 9, 11, 241])
-    colisoes = colisoes.criar_colisoes()
-    for coord in colisoes:
-        caixa = pygame.Rect(coord[0], coord[1], 32, 32)
+    # DESCOMENTAR PARA TESTE DE COLISÕES
+    # for coord in colisoes:
+    #     caixa = pygame.Rect(coord[0], coord[1], 32, 32)
+    #     pygame.draw.rect(tela, '#ff0000', caixa, 1)
         # Adicionar colisão do inimigo com paredes aqui futuramente
 
     #atualiza todos os sprites do grupo do player
@@ -108,11 +111,15 @@ while running_game:
     
     # Desenha os sprites na janela
     sprites_group.draw(tela)
-    grupo_coletaveis.draw(tela) #desenha os coletaveis
+    pos_coletaveis.draw(tela) #desenha os coletaveis
     grupo_inimigos.draw(tela) #Desenha os inimigos
-    
+    # pygame.draw.rect(tela, '#00ff00', player.hitbox, 1) # DESCOMENTAR PARA TESTAR HITBOX
+
     # HUD dos coletaveis
     hud.desenhar_hud(tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, player.vida)
+
+    # desenha a camada de árvores
+    mapas.desenhar_arvores(tela)
    
     pygame.display.update()
 
