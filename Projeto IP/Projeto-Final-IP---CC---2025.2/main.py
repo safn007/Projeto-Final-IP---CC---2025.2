@@ -15,7 +15,7 @@ mapas = Mapas(largura, altura)
 tela = pygame.display.set_mode((largura, altura)) # Define o tamanho da janela do jogo
 pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da janela
 
-player = Player(250, 250)
+player = Player(250, 250, [])
 player.vida = 3 # Começa com 3 corações
 
 # Criando grupo de inimigos espalhados
@@ -64,6 +64,12 @@ while running_game:
         if event.type == pygame.QUIT:
             running_game = False
 
+    # troca de mapa (altera o rect diretamente)
+    mapas.trocar_mapa(player)            
+    
+    # desenha mapa
+    mapas.desenhar(tela)
+
     # Lógica de Game Over 
     if player.vida <= 0:
         print("GAME OVER")
@@ -85,18 +91,15 @@ while running_game:
             elif item.tipo == "carangueijo":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
-                
-    # desenha mapa
-    mapas.desenhar(tela)
-    
-    # troca de mapa (altera o rect diretamente)
-    mapas.trocar_mapa(player)
 
     # coletar colisões
-    colisoes = Colisoes([3, 5, 9, 11, 241])
-    colisoes = colisoes.criar_colisoes()
-    for coord in colisoes:
-        caixa = pygame.Rect(coord[0], coord[1], 32, 32)
+    atual = mapas.mapa_atual
+    colisoes = Colisoes([])
+    colisoes = colisoes.lista_colisoes(atual)
+    player.colisoes = colisoes
+    # for coord in colisoes:
+    #     caixa = pygame.Rect(coord[0], coord[1], 32, 32)
+    #     pygame.draw.rect(tela, '#ff0000', caixa, 1)
         # Adicionar colisão do inimigo com paredes aqui futuramente
 
     #atualiza todos os sprites do grupo do player
@@ -106,10 +109,14 @@ while running_game:
     sprites_group.draw(tela)
     grupo_coletaveis.draw(tela) #desenha os coletaveis
     grupo_inimigos.draw(tela) #Desenha os inimigos
-    
+    # pygame.draw.rect(tela, '#00ff00', player.hitbox, 1)
+
     # HUD dos coletaveis
     hud.desenhar_hud(tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, player.vida)
-   
+    
+    # desenha a camada de árvores
+    mapas.desenhar_arvores(tela)
+
     pygame.display.update()
 
 pygame.quit()

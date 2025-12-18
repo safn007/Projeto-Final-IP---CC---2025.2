@@ -8,12 +8,24 @@ class Mapas:
         self.mapa1 = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_1.png')
         self.mapa2 = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_2.png')
         self.mapa3 = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_3.png')
+        self.mapa4 = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_4.png')
+
+        self.mapa1_arvores = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_1_arvores.png')
+        self.mapa2_arvores = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_2_arvores.png')
+        self.mapa3_arvores = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_3_arvores.png')
+        self.mapa4_arvores = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_4_arvores.png')
 
         self.mapa1 = pygame.transform.scale(self.mapa1, (largura, altura))
         self.mapa2 = pygame.transform.scale(self.mapa2, (largura, altura))
         self.mapa3 = pygame.transform.scale(self.mapa3, (largura, altura))
+        self.mapa4 = pygame.transform.scale(self.mapa4, (largura, altura))
 
-        # mapa atual
+        self.mapa1_arvores = pygame.transform.scale(self.mapa1_arvores, (largura, altura))
+        self.mapa2_arvores = pygame.transform.scale(self.mapa2_arvores, (largura, altura))
+        self.mapa3_arvores = pygame.transform.scale(self.mapa3_arvores, (largura, altura))
+        self.mapa4_arvores = pygame.transform.scale(self.mapa4_arvores, (largura, altura))
+
+        # mapa inicial
         self.mapa_atual = 1
 
     def desenhar(self, tela):
@@ -23,14 +35,25 @@ class Mapas:
             tela.blit(self.mapa2, (0, 0))
         elif self.mapa_atual == 3:
             tela.blit(self.mapa3, (0, 0))
+        elif self.mapa_atual == 4:
+            tela.blit(self.mapa4, (0, 0))
+
+    def desenhar_arvores(self, tela):
+        if self.mapa_atual == 1:
+            tela.blit(self.mapa1_arvores, (0, 0))
+        elif self.mapa_atual == 2:
+             tela.blit(self.mapa2_arvores, (0, 0))
+        elif self.mapa_atual == 3:
+             tela.blit(self.mapa3_arvores, (0, 0))
+        elif self.mapa_atual == 4:
+             tela.blit(self.mapa4_arvores, (0, 0))
 
     def trocar_mapa(self, player):
-
         if self.mapa_atual == 1:
             if player.rect.top > self.altura:
                 self.mapa_atual = 2
-                player.rect.y = 0
                 player.pos_y = 0.0
+                player.rect.y = int(player.pos_y)
 
         elif self.mapa_atual == 2:
             if player.rect.bottom < 0:
@@ -49,3 +72,13 @@ class Mapas:
                 player.rect.x = self.largura - player.rect.width
                 player.pos_x = float(player.rect.x)
 
+            elif player.rect.top > self.altura:
+                self.mapa_atual = 4
+                player.pos_y = 0.0
+                player.rect.y = int(player.pos_y)
+
+        elif self.mapa_atual == 4:
+            if player.rect.bottom < 0:
+                self.mapa_atual = 3
+                player.rect.y = self.altura - player.rect.height
+                player.pos_y = float(player.rect.y)
