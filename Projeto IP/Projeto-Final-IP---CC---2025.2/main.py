@@ -3,6 +3,7 @@ import pygame
 from src.mapas import Mapas
 from src.colisoes import Colisoes
 from src.player import Player
+from src.inimigo import Inimigo
 from src.interface import interface
 
 pygame.init() # Inicia o pygame
@@ -35,21 +36,37 @@ pygame.font.init()
 # Cria o HUD dos coletaveis
 hud = interface()
 
+# variável para inicializar os mapas
+inicializar = True
+
 while running_game:
     clock.tick(60) # Limita os FPS a 60
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running_game = False
-
-    # troca de mapa (altera o rect diretamente)
-    mapa_antigo = mapas.mapa_atual
-    mapas.trocar_mapa(player)
-    if mapa_antigo != mapas.mapa_atual:
-        coletado = False          
     
     # desenha mapa
-    coletaveis_inimigos = mapas.desenhar(tela, coletado, chapeu_coletado, oculos_coletado)
+    pos_coletaveis = mapas.desenhar(tela, coletado, chapeu_coletado, oculos_coletado)
+
+    # troca de mapa/ inicializa colisões e inimigos
+    mapa_antigo = mapas.mapa_atual
+    mapas.trocar_mapa(player)
+    if mapa_antigo != mapas.mapa_atual or inicializar == True:
+        coletado = False       
+        inicializar = False
+        # coletar colisões
+        atual = mapas.mapa_atual
+        colisoes = Colisoes([])
+        colisoes = colisoes.lista_colisoes(atual)
+        player.colisoes = colisoes  
+
+        pos_inimigos = mapas.get_inimigos()
+        grupo_inimigos = pygame.sprite.Group() 
+        for pos in pos_inimigos:
+            # Cria um inimigo para cada posição e adiciona ao grupo
+            inimigo = Inimigo(pos[0], pos[1])
+            grupo_inimigos.add(inimigo)
 
     # Lógica de Game Over 
     if player.vida <= 0:
@@ -57,9 +74,9 @@ while running_game:
         running_game = False
 
     # Atualiza inimigos passando o player
-    coletaveis_inimigos[1].update(player)
+    grupo_inimigos.update(player)
 
-    for item in coletaveis_inimigos[0]:
+    for item in pos_coletaveis:
         if player.hitbox.colliderect(item.rect):
             item.kill() # remove o item do jogo e do grupo
             
@@ -80,11 +97,6 @@ while running_game:
                 qnt_carangueijo+=1
                 coletado = True
 
-    # coletar colisões
-    atual = mapas.mapa_atual
-    colisoes = Colisoes([])
-    colisoes = colisoes.lista_colisoes(atual)
-    player.colisoes = colisoes
     # for coord in colisoes:
     #     caixa = pygame.Rect(coord[0], coord[1], 32, 32)
     #     pygame.draw.rect(tela, '#ff0000', caixa, 1)
@@ -95,8 +107,8 @@ while running_game:
     
     # Desenha os sprites na janela
     sprites_group.draw(tela)
-    coletaveis_inimigos[0].draw(tela) #desenha os coletaveis
-    coletaveis_inimigos[1].draw(tela) #Desenha os inimigos
+    pos_coletaveis.draw(tela) #desenha os coletaveis
+    grupo_inimigos.draw(tela) #Desenha os inimigos
     # pygame.draw.rect(tela, '#00ff00', player.hitbox, 1)
 
     # HUD dos coletaveis

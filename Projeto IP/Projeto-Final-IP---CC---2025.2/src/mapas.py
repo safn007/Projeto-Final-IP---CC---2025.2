@@ -7,6 +7,7 @@ class Mapas:
         self.largura = largura
         self.altura = altura
 
+        # carrega os mapas
         self.mapa1 = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_1.png')
         self.mapa2 = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_2.png')
         self.mapa3 = pygame.image.load('Projeto IP/Projeto-Final-IP---CC---2025.2/Assets/Imagens/mapa_3.png')
@@ -30,27 +31,36 @@ class Mapas:
         # mapa inicial
         self.mapa_atual = 1
 
+    # define a posição dos inimigos dependendo do mapa
+    def get_inimigos(self):
+        if self.mapa_atual == 1:
+            pos_inimigos = []
+
+        elif self.mapa_atual == 2:
+            pos_inimigos = [
+                (300, 400),
+                (500, 500)
+            ]
+            
+        elif self.mapa_atual == 3:
+            pos_inimigos = []
+
+        elif self.mapa_atual == 4:
+            pos_inimigos = [
+                (100, 100),
+                (300, 300)
+            ]
+            
+        return pos_inimigos
+
+    # retorna a posição dos itens e dos objetos
     def desenhar(self, tela, coletado, chapeu_coletado, oculos_coletado):
         grupo_coletaveis = pygame.sprite.Group()
-        grupo_inimigos = pygame.sprite.Group()
 
         if self.mapa_atual == 1:
             # posiciona os coletáveis
             if coletado == False and chapeu_coletado == False:
                 grupo_coletaveis.add(Coletavel("chapeu", 100, 100))
-            
-            # adiciona os inimigos
-            posicoes_inimigos = [
-                (600, 300), 
-                (800, 100), 
-                (150, 500), 
-                (850, 550) 
-            ]
-
-            for pos in posicoes_inimigos:
-                # Cria um inimigo para cada posição e adiciona ao grupo
-                inimigo = Inimigo(pos[0], pos[1])
-                grupo_inimigos.add(inimigo)
 
             # desenha o mapa
             tela.blit(self.mapa1, (0, 0))
@@ -60,31 +70,24 @@ class Mapas:
             if coletado == False and oculos_coletado == False:
                 grupo_coletaveis.add(Coletavel("oculos", 150, 100))
 
-            # adiciona os inimigos
-
             # desenha o mapa
             tela.blit(self.mapa2, (0, 0))
         
         elif self.mapa_atual == 3:
             # posiciona os coletáveis 
             grupo_coletaveis.add(Coletavel("carangueijo", 600, 500))
-            
-            # adiciona os inimigos
 
             # desenha o mapa
             tela.blit(self.mapa3, (0, 0))
         
         elif self.mapa_atual == 4:
-            # posiciona os coletáveis
-            
-            # adiciona os inimigos
-
             # desenha o mapa
             tela.blit(self.mapa4, (0, 0))
         
         # retorna os coletaveis e os inimigos
-        return [grupo_coletaveis, grupo_inimigos]
+        return grupo_coletaveis
 
+    # desenha a camada de árvores para o player poder passar por trás delas
     def desenhar_arvores(self, tela):
         if self.mapa_atual == 1:
             tela.blit(self.mapa1_arvores, (0, 0))
@@ -95,6 +98,7 @@ class Mapas:
         elif self.mapa_atual == 4:
              tela.blit(self.mapa4_arvores, (0, 0))
 
+    # lógica de troca de mapas
     def trocar_mapa(self, player):
         if self.mapa_atual == 1:
             if player.rect.top > self.altura:
