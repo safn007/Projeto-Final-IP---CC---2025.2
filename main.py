@@ -12,6 +12,10 @@ from src.tela_inicial import menu_principal
 menu_principal()
 
 pygame.init() # Inicia o pygame
+pygame.mixer.init()
+
+#baixando os efeitos sonoros
+som_coletando_itens = pygame.mixer.Sound("Assets/Efeitos Sonoros/game-start-317318.mp3")
 
 largura = 960
 altura = 640
@@ -82,6 +86,8 @@ while running_game:
     for item in pos_coletaveis:
         if player.hitbox.colliderect(item.rect):
             item.kill() # remove o item do jogo e do grupo
+            
+            som_coletando_itens.play()
             
             if item.tipo == "chapeu":
                 print("pegou chapeu")
