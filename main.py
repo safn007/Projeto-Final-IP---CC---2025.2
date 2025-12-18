@@ -26,7 +26,7 @@ player.vida = 3 # Começa com 3 corações
 qnt_chapeu = 0
 qnt_oculos = 0
 qnt_carangueijo = 0
-coletado, chapeu_coletado, oculos_coletado = False, False, False
+coletado, chapeu_coletado, oculos_coletado, c1_coletado, c2_coletado, c3_coletado = False, False, False, False, False, False
 
 # Grupo de sprites
 sprites_group = pygame.sprite.Group()
@@ -57,7 +57,7 @@ while running_game:
         running_game = False
 
     # desenha mapa
-    pos_coletaveis = mapas.desenhar(tela, coletado, chapeu_coletado, oculos_coletado)
+    pos_coletaveis = mapas.desenhar(tela, coletado, chapeu_coletado, oculos_coletado, c1_coletado, c2_coletado, c3_coletado)
 
     # troca de mapa/ inicializa colisões e inimigos
     mapa_antigo = mapas.mapa_atual
@@ -95,10 +95,23 @@ while running_game:
                 coletado = True
                 oculos_coletado = True
 
-            elif item.tipo == "carangueijo":
+            elif item.tipo == "carangueijo1":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
                 coletado = True
+                c1_coletado = True
+
+            elif item.tipo == "carangueijo2":
+                print("pegou carangueijo")
+                qnt_carangueijo+=1
+                coletado = True
+                c2_coletado = True
+
+            elif item.tipo == "carangueijo3":
+                print("pegou carangueijo")
+                qnt_carangueijo+=1
+                coletado = True
+                c3_coletado = True
 
     # DESCOMENTAR PARA TESTE DE COLISÕES
     # for coord in colisoes:
@@ -108,6 +121,9 @@ while running_game:
 
     #atualiza todos os sprites do grupo do player
     sprites_group.update() 
+
+    # atualiza a movimentação dos inimigos
+    grupo_inimigos.update(player)
     
     # Desenha os sprites na janela
     sprites_group.draw(tela)
