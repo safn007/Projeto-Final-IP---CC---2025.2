@@ -43,7 +43,7 @@
 
 6. Divisão de trabalho 📝:
   - Samuel: Fez o README, a tela principal 
-  - Guilherme: Fez o mapas.py, colisoes.py, e conectou as mudanças dos mapas com o player, 
+  - Guilherme: Fez os mapas, colisões e suas lógicas
   - Gabriel Brum:  
   - Gabriel Ribeiro: Fez o player.py e a movimentação do jogador
   - Eduardo: 
