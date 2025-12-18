@@ -119,18 +119,32 @@ class Player(pygame.sprite.Sprite):
         self.image = animation[int(self.frame_index)]
     
     def update(self):
-        self.input() # Chama a funcao input
+        self.input()
         self.get_status()
         self.animate()
-        
-        # Atualiza posicao
+
+        # colisão horizontal
         self.pos_x += self.direction.x * self.speed
+        self.hitbox.centerx = int(self.pos_x + (self.rect.width / 2))
+        
+        for barreira in self.colisoes:
+            if self.hitbox.colliderect(barreira):
+                if self.direction.x > 0:
+                    self.hitbox.right = barreira.left
+                if self.direction.x < 0:
+                    self.hitbox.left = barreira.right
+                self.pos_x = self.hitbox.centerx - (self.rect.width / 2)
+
+        # colisão vertical
         self.pos_y += self.direction.y * self.speed
-        
-        # Atualiza o rect -> que é o que o Pygame desenha na tela
-        self.rect.x = int(self.pos_x)
-        self.rect.y = int(self.pos_y)
-        
-        self.hitbox.center = self.rect.center
-    
-        
+        self.hitbox.centery = int(self.pos_y + (self.rect.height / 2)) # Sincroniza hitbox com a nova pos_y
+
+        for barreira in self.colisoes:
+            if self.hitbox.colliderect(barreira):
+                if self.direction.y > 0:
+                    self.hitbox.bottom = barreira.top
+                if self.direction.y < 0:
+                    self.hitbox.top = barreira.bottom
+                self.pos_y = self.hitbox.centery - (self.rect.height / 2)
+
+        self.rect.center = self.hitbox.center
