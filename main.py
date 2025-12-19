@@ -7,6 +7,7 @@ from src.player import Player
 from src.inimigo import Inimigo 
 from src.interface import interface
 from src.tela_inicial import menu_principal
+from src.tela_gameover import tela_game_over
 
 #rodando menu principal
 menu_principal()
@@ -26,7 +27,7 @@ largura = 960
 altura = 640
 mapas = Mapas(largura, altura)
 tela = pygame.display.set_mode((largura, altura)) # Define o tamanho da janela do jogo
-pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da janela
+pygame.display.set_caption("Uma aventura Manguebeat") # Nome que aparece no título da janela
 
 player = Player(230, 250)
 player.vida = 3 # Começa com 3 corações
@@ -66,6 +67,7 @@ while running_game:
         if som:
             som = False
             som_gameover.play()
+        tela_game_over()
 
     # desenha mapa
     pos_coletaveis = mapas.desenhar(tela, chapeu_coletado, oculos_coletado, coracao1_coletado, coracao2_coletado, c1_coletado, c2_coletado, c3_coletado)
@@ -112,33 +114,27 @@ while running_game:
                 coracao1_coletado = True
 
             if item.tipo == "coracao2":
-                print("pegou vida")
                 if player.vida < 3:  
                     player.vida += 1
                 coracao2_coletado = True
             
             elif item.tipo == "chapeu":
-                print("pegou chapeu")
                 qnt_chapeu+=1
                 chapeu_coletado = True
 
             elif item.tipo == "oculos":
-                print("pegou oculos")
                 qnt_oculos+=1
                 oculos_coletado = True
 
             elif item.tipo == "carangueijo1":
-                print("pegou carangueijo")
                 qnt_carangueijo+=1
                 c1_coletado = True
 
             elif item.tipo == "carangueijo2":
-                print("pegou carangueijo")
                 qnt_carangueijo+=1
                 c2_coletado = True
 
             elif item.tipo == "carangueijo3":
-                print("pegou carangueijo")
                 qnt_carangueijo+=1
                 c3_coletado = True
 
