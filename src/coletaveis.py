@@ -18,8 +18,10 @@ class Coletavel(pygame.sprite.Sprite):
             self.image = pygame.image.load(os.path.join(imagens_path, 'Pata-Carangueijo.png'))
         elif self.tipo == "carangueijo3":
             self.image = pygame.image.load(os.path.join(imagens_path, 'Pata-Carangueijo.png'))
-        elif self.tipo == "coracao":
-            self.image = pygame.image.load(os.path.join(imagens_path, 'vida-jogador.png'))   
+        elif self.tipo == "coracao1":
+            self.image = pygame.image.load(os.path.join(imagens_path, 'vida-jogador.png'))
+        elif self.tipo == "coracao2":
+            self.image = pygame.image.load(os.path.join(imagens_path, 'vida-jogador.png'))     
         
         # O rect define a posição e a área de colisão
         self.rect = self.image.get_rect()
