@@ -50,9 +50,9 @@
 # 6. Divisão de trabalho 📝:
   - Samuel: Fez o README, o tela_inicial.py e o instrucoes.py.
   - Guilherme: Fez os mapas, colisões e suas lógicas
-  - Gabriel Brum:  
+  - Gabriel Brum: Fez os inimigos e a lógica de perseguição
   - Gabriel Ribeiro: Fez o player.py e a movimentação do jogador
-  - Eduardo: 
+  - Eduardo: Fez os Coletáveis, HUD e efeitos sonoros
   - Thiago: Fez main_2.py, sprites do Sprites-possíveis, slides.
 
 # 7. Conceitos de Programação utilizados 📚:
