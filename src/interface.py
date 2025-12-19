@@ -3,7 +3,8 @@ import pygame
 class interface():
     def __init__(self):
         # Carrega a Fonte 
-        self.fonte = pygame.font.Font('Assets/Fontes/MONOCRAFT.TTC', 23)
+        self.fonte_maior = pygame.font.Font('Assets/Fontes/MONOCRAFT.TTC', 23)
+        self.fonte_menor = pygame.font.Font('Assets/Fontes/MONOCRAFT.TTC', 12)
         
         # Carrega as Imagens dos ícones
         img_chapeu = pygame.image.load('Assets/Imagens/Chapeu-Chico-Science.png')
@@ -22,11 +23,15 @@ class interface():
         self.BRANCO = (255, 255, 255)
         self.PRETO = (0, 0, 0)
 
-    def _desenhar_texto_com_borda(self, tela, texto, x, y):
-        grossura = 2
-        
+    def _desenhar_texto_com_borda(self, tela, texto, x, y, fonte=None):
+        if fonte == None:
+            fonte = self.fonte_maior
+            grossura = 2
+        else:
+            fonte = self.fonte_menor
+            grossura = 1
         # Renderiza a borda preta
-        img_borda = self.fonte.render(texto, False, self.PRETO)
+        img_borda = fonte.render(texto, False, self.PRETO)
         
         # Desenha a sombra em várias direções
         for dx in range(-grossura, grossura + 1):
@@ -35,7 +40,7 @@ class interface():
                     tela.blit(img_borda, (x + dx, y + dy))
 
         # Renderiza o texto principal branco
-        img_texto = self.fonte.render(texto, False, self.BRANCO)
+        img_texto = fonte.render(texto, False, self.BRANCO)
         tela.blit(img_texto, (x, y))
 
     def desenhar_hud(self, tela, qnt_chapeu, qnt_oculos, qnt_carangueijo, qnt_vidas):
@@ -50,7 +55,8 @@ class interface():
         # Caranguejo
         tela.blit(self.icone_carangueijo, (235, 12))
         self._desenhar_texto_com_borda(tela, f"x {qnt_carangueijo}", 270, 15)
-
+        self._desenhar_texto_com_borda(tela, f"velocidade", 260, 45, self.fonte_menor)
+        
         # Vidas
         tela.blit(self.icone_vida, (850, 13))
         self._desenhar_texto_com_borda(tela, f"x {qnt_vidas}", 895, 15)
