@@ -1,6 +1,6 @@
 # 🦀 🤠 Explorando as forças do mangue!!!
 
-### Chegou a hora de invocar as forças culturais de ninguém menos que Chico Science !!! Se prepare para ajudar nosso protagonista nessa jornada manguelística! Aviso: Cuidado com as patolas cortantes dos caranguejos protetores...eles não deixam qualquer um passar pelo santuário MangueBeat...prove que nosso explorador é merecedor dessa conquista!
+### Chegou a hora de invocar as forças culturais de ninguém menos que Chico Science!!! Prepare-se para ajudar nosso protagonista nessa jornada manguelística! Aviso: Cuidado com as patolas cortantes dos caranguejos protetores... eles não deixam qualquer um passar pelo santuário MangueBeat... prove que nosso explorador é merecedor dessa conquista!
 # 1. Título do Jogo💥: Uma Aventura MangueBeat
 
 # 2. Membros🚹:
@@ -15,16 +15,16 @@
   ### O jogo foi desenvolvido com a biblioteca Pygame e estruturado em diferentes arquivos para melhor organização:
 
 - main.py: controla o funcionamento geral do jogo, contendo as instâncias principais de todos os outros arquivos do projeto.
-- src.
-   - coletaveis.py: define a classe "Coletavel" para ser aplicada aos objetos que o player coleta durante o jogo.
-   - colisoes.py: lida com o comportamento do player durante a interação física com os coletáveis e com os inimigos.
-   - inimigo.py: define a movimentação e o comportamento do inimigo durante o jogo.
-   - mapas.py: programa a alternância entre os diferentes cenários de acordo com a movimentação do player.
-   - player.py: define a classe player, programando a movimentação desse objeto através das teclas W, A, S e D.
-   - tela_inicial.py: gera o plano de fundo inical do jogo, contendo os botões de "Iniciar" e de "Instruções" / importa a função "mostrar_instrucao()".
-   - instrucoes.py: gera o plano de fundo de instruções, informandosobre os obejtivos e movimentação do player / estruturado a partir de uma função principal.
-   - interface.py: registra a quantidade de coletáveis coletador pelo player / mostra na tela esse registro.
-   - tela_gameover.py: gera o plano de fundo do gameover para ser mostrado assim que o jogador perde suas vidas.   
+- src:
+   - coletaveis.py: Define a classe "Coletavel" para ser aplicada aos objetos que o player coleta durante o jogo.
+   - colisoes.py: Lida com o comportamento do player durante a interação física com os coletáveis e com os inimigos.
+   - inimigo.py: Define a movimentação e o comportamento do inimigo durante o jogo.
+   - mapas.py: Programa a alternância entre os diferentes cenários de acordo com a movimentação do player.
+   - player.py: Define a classe player, programando a movimentação desse objeto através das teclas W, A, S e D.
+   - tela_inicial.py: Gera o plano de fundo inicial do jogo, contendo os botões de "Iniciar" e de "Instruções" / importa a função "mostrar_instrucao()".
+   - instrucoes.py: Gera o plano de fundo de instruções, informando sobre os objetivos e movimentação do player / estruturado a partir de uma função principal.
+   - interface.py: Registra a quantidade de coletáveis coletados pelo player / mostra na tela esse registro.
+   - tela_gameover.py: Gera o plano de fundo do "Game Over" para ser mostrado assim que o jogador perde suas vidas.   
 
 
 # 4. Capturas de Tela 📸:
@@ -57,7 +57,7 @@
 
 # 5. Ferramentas, bibliotecas e frameworks utilizados 🛠:
 ### Python 3.13.7
-### Biblioteca Pygame : biblioteca principal usada para renderização, eventos e lógica do jogo.
+### Biblioteca Pygame: Biblioteca principal usada para renderização, eventos e lógica do jogo.
 - O pygame possui uma ampla gama de informações de uso, além de lidar com os aspectos mais complexos de baixo nível, permitindo que você se concentre nos conceitos fundamentais de desenvolvimento de jogos, como game loop, detecção de colisão, gerenciamento de sprites e estados do jogo.
 ### Pixabay
 - Usamos para baixar os áudios para a música de fundo e para os efeitos sonoros.
@@ -77,11 +77,11 @@
   - Programação Orientada a Objetos: Excluindo o arquivo main(), todos os outros arquivos possuem a definição de classes para instanciação no arquivo main().
   - Estruturas de Controle de:
     1.  Dados: Uso de listas e variáveis para o registro e a contagem dos coletáveis.
-    2.  Fluxo: loops aninhados para diversas funções, tais como a visibilidade do jogo na tela e a análise dos coletávies.
-  - Modularização: separação do código em vários arquivos.
+    2.  Fluxo: Loops aninhados para diversas funções, tais como a visibilidade do jogo na tela e a análise dos coletáveis.
+  - Modularização: Separação do código em vários arquivos.
 
 # 8. Aprendizados e Desafios 📈:
-- Dificuldade com a lógica do github: Aprendemos muito sobre como gerenciar arquivos e versões no github.
+- Dificuldade com a lógica do GitHub: Aprendemos muito sobre como gerenciar arquivos e versões no GitHub.
 - Funções nativas do pygame: Compreendemos a ideia das funções básicas da biblioteca do pygame e como usá-las ao nosso favor.
 - Construção do código em equipe: Gerenciar o jogo em equipe exige muita comunicação, e durante o projeto evoluímos bastante nesse tópico, sempre dando feedbacks e alinhando os objetivos e tarefas de cada membro.
 
