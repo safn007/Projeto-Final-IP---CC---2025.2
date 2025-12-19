@@ -7,7 +7,9 @@ from src.player import Player
 from src.inimigo import Inimigo 
 from src.interface import interface
 from src.tela_inicial import menu_principal
-from src.tela_gameover import tela_game_over
+from src.telas_finais import tela_game_over
+from src.telas_finais import tela_vitoria
+
 
 #rodando menu principal
 menu_principal()
@@ -147,12 +149,9 @@ while running_game:
     if mapas.mapa_atual == 6:
         vitoria = pygame.Rect(450, 350, 32, 32)
 
-    # DESCOMENTAR PARA TESTE DE COLISÕES
-    # for coord in colisoes:
-    #     caixa = pygame.Rect(coord[0], coord[1], 32, 32)
-    #     pygame.draw.rect(tela, '#ff0000', caixa, 1)
-        # Adicionar colisão do inimigo com paredes aqui futuramente
-
+        if player.hitbox.colliderect(vitoria):
+            tela_vitoria()
+            
     #atualiza todos os sprites do grupo do player
     sprites_group.update() 
 
