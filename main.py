@@ -93,7 +93,6 @@ while running_game:
             if item.tipo == "coracao":
                 print("pegou vida") 
                 player.vida += 1
-                coletado = True
                 coracao_coletado = True
             
             elif item.tipo == "chapeu":
