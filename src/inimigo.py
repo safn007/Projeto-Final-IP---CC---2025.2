@@ -54,7 +54,7 @@ class Inimigo(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(-20, -20)
 
         # Status
-        self.velocidade = 0.9 
+        self.velocidade = 1.06
         self.raio_alerta = 250
         self.dano = 1 
         
