@@ -57,7 +57,7 @@ while running_game:
             running_game = False
 
     # Lógica de Game Over 
-    if player.vida <= -10000:
+    if player.vida <= 0:
         print("GAME OVER")
         running_game = False
 
