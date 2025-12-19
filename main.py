@@ -59,9 +59,6 @@ inicializar = True
 while running_game:
     clock.tick(60) # Limita os FPS a 60
     
-    mouse_x, mouse_y = pygame.mouse.get_pos()
-    print(f"Coordenada atual: X={mouse_x}, Y={mouse_y}")
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running_game = False
