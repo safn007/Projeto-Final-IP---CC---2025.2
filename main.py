@@ -58,7 +58,7 @@ inicializar = True
 
 while running_game:
     clock.tick(60) # Limita os FPS a 60
-
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running_game = False
