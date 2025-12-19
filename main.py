@@ -7,6 +7,7 @@ from src.player import Player
 from src.inimigo import Inimigo 
 from src.interface import interface
 from src.tela_inicial import menu_principal
+from src.tela_gameover import tela_game_over
 
 #rodando menu principal
 menu_principal()
@@ -65,6 +66,7 @@ while running_game:
         if som:
             som = False
             som_gameover.play()
+        tela_game_over()
 
     # desenha mapa
     pos_coletaveis = mapas.desenhar(tela, chapeu_coletado, oculos_coletado, coracao1_coletado, coracao2_coletado, c1_coletado, c2_coletado, c3_coletado)
