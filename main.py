@@ -93,11 +93,11 @@ while running_game:
 
     # aumentar velocidade de acordo com numero de patas
     if qnt_carangueijo == 1:
-        player.speed = 3.5
+        player.speed = 2.33
     if qnt_carangueijo == 2:
-        player.speed = 4
+        player.speed = 2.66
     if qnt_carangueijo == 3:
-        player.speed = 4.5
+        player.speed = 3
 
     # lógica de coleta de itenssss
     for item in pos_coletaveis:
