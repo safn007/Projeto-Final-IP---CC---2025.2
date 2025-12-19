@@ -158,7 +158,14 @@ while running_game:
     grupo_inimigos.update(player)
     
     # Desenha os sprites na janela
-    sprites_group.draw(tela)
+    for sprite in sprites_group: # Sprite do player
+        if isinstance(sprite, Player) and not sprite.vulneravel:
+            img_vermelha = sprite.image.copy() # copia da imagem original
+            img_vermelha.fill((255, 0, 0, 255), special_flags=pygame.BLEND_RGBA_MULT) # fica vermelho
+            tela.blit(img_vermelha, sprite.rect)
+        else:
+            tela.blit(sprite.image, sprite.rect)
+            
     pos_coletaveis.draw(tela) #desenha os coletaveis
     grupo_inimigos.draw(tela) #Desenha os inimigos
     # pygame.draw.rect(tela, '#00ff00', player.hitbox, 1) # DESCOMENTAR PARA TESTAR HITBOX

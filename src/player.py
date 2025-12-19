@@ -40,6 +40,16 @@ class Player(pygame.sprite.Sprite):
         self.speed = 2
         self.direction = pygame.math.Vector2(0, 0)
         
+        # Logica do dano
+        self.vulneravel = True
+        self.timer_dano = 0
+        self.duracao_dano = 200 # Tempo q fica vermelho
+        
+    def tomar_dano(self):
+        if self.vulneravel:
+            self.vulneravel = False
+            self.timer_dano = pygame.time.get_ticks()
+        
     def import_assets(self):
         diretory = os.path.dirname(__file__) # Pega a pasta onde o player.py ta
         path = os.path.join(diretory, "..", "Assets", "Imagens") # Caminho ate a pasta das imagens
@@ -144,6 +154,12 @@ class Player(pygame.sprite.Sprite):
         self.input()
         self.get_status()
         self.animate()
+        
+        # Logica do cooldown
+        if not self.vulneravel:
+            agora = pygame.time.get_ticks()
+            if agora - self.timer_dano >= self.duracao_dano:
+                self.vulneravel = True
 
         # colisão horizontal
         self.pos_x += self.direction.x * self.speed
