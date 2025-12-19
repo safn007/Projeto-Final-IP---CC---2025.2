@@ -23,8 +23,8 @@
    - player.py: Define a classe player, programando a movimentação desse objeto através das teclas W, A, S e D.
    - tela_inicial.py: Gera o plano de fundo inicial do jogo, contendo os botões de "Iniciar" e de "Instruções" / importa a função "mostrar_instrucao()".
    - instrucoes.py: Gera o plano de fundo de instruções, informando sobre os objetivos e movimentação do player / estruturado a partir de uma função principal.
-   - interface.py: Registra a quantidade de coletáveis coletados pelo player / mostra na tela esse registro.
-   - tela_gameover.py: Gera o plano de fundo do "Game Over" para ser mostrado assim que o jogador perde suas vidas.   
+   - interface.py: Registra a quantidade de coletáveis coletados pelo player e suas vidas / mostra na tela esse registro.
+   - telas_finais.py: Gera o plano de fundo e as músicas das telas "Game Over" e Vitória para ser mostrado assim que o jogador perde suas vidas ou ganha o jogo.   
 
 
 # 4. Capturas de Tela 📸:
@@ -70,7 +70,7 @@
   - Guilherme: Fez os mapas.py, colisoes.py e suas lógicas.
   - Gabriel Brum: Fez os inimigos e a lógica de perseguição.
   - Gabriel Ribeiro: Fez o player.py e a movimentação do jogador.
-  - Eduardo: Fez os Coletáveis, HUD, efeitos sonoros e o game_over.py.
+  - Eduardo: Fez os Coletáveis, HUD, efeitos sonoros e telas-finais.py.
   - Thiago: Sprites do Sprites-possíveis e os slides.
 
 # 7. Conceitos de Programação utilizados 📚:
@@ -92,7 +92,7 @@
 - Pygame instalado (pip install pygame).
 ### Instruções:
 - Acesse nosso código em nosso repositório github: https://github.com/safn007/Projeto-Final-IP---CC---2025.2.git
-- Use as teclas W, A, S, D para movimentar oplayer, fugir dos caranguejos defensores e coletar os itens.
+- Use as teclas W, A, S, D para movimentar oplayer, fugir dos caranguejos defensores, coletar os itens necessários e chegar à fase final.
 
 ## BOM JOGO! SE DIVIRTA NESSA INCRÍVEL AVENTURA MANGUEBEAT!
 
