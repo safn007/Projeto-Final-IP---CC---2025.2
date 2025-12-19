@@ -116,6 +116,7 @@ class Inimigo(pygame.sprite.Sprite):
                 self.ultimo_ataque = agora
                 if hasattr(player, 'vida'):
                     if player.vida != 0:
-                        player.vida -= self.dano
-                        if player.vida > 0:
+                        if player.vulneravel: # verifica se o player pode levar dano
+                            player.vida -= self.dano
+                            player.tomar_dano()  # ativa o efeito vermelho
                             som_dano_recebido.play()
