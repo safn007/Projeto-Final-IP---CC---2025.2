@@ -30,7 +30,9 @@ player.vida = 3 # Começa com 3 corações
 qnt_chapeu = 0
 qnt_oculos = 0
 qnt_carangueijo = 0
-coletado, chapeu_coletado, oculos_coletado, c1_coletado, c2_coletado, c3_coletado = False, False, False, False, False, False
+
+
+coletado = chapeu_coletado = oculos_coletado = coracao_coletado = c1_coletado = c2_coletado = c3_coletado = False
 
 # Grupo de sprites
 sprites_group = pygame.sprite.Group()
@@ -61,7 +63,7 @@ while running_game:
         running_game = False
 
     # desenha mapa
-    pos_coletaveis = mapas.desenhar(tela, coletado, chapeu_coletado, oculos_coletado, c1_coletado, c2_coletado, c3_coletado)
+    pos_coletaveis = mapas.desenhar(tela, coletado, chapeu_coletado, oculos_coletado, coracao_coletado,c1_coletado, c2_coletado, c3_coletado)
 
     # troca de mapa/ inicializa colisões e inimigos
     mapa_antigo = mapas.mapa_atual
@@ -82,14 +84,19 @@ while running_game:
             inimigo = Inimigo(pos[0], pos[1])
             grupo_inimigos.add(inimigo)
 
-    # lógica de coleta de itens
+    # lógica de coleta de itenssss
     for item in pos_coletaveis:
         if player.hitbox.colliderect(item.rect):
             item.kill() # remove o item do jogo e do grupo
             
             som_coletando_itens.play()
+            if item.tipo == "coracao":
+                print("pegou vida") 
+                player.vida += 1
+                coletado = True
+                coracao_coletado = True
             
-            if item.tipo == "chapeu":
+            elif item.tipo == "chapeu":
                 print("pegou chapeu")
                 qnt_chapeu+=1
                 coletado = True
