@@ -1,6 +1,6 @@
 # 🦀 🤠 Explorando as forças do mangue!!!
 
-### Chegou a hora de invocar as forças culturais de ninguém menos que Chico Science !!! Se prepare para ajudar nosso protagonista nessa jornada manguelística! Aviso: Cuidado com as patolas cortantes dos carangueijos protetores...eles não deixam qualquer um passar pelo santuário MangueBeat...prove que nosso explorador é merecedor dessa conquista!
+### Chegou a hora de invocar as forças culturais de ninguém menos que Chico Science !!! Se prepare para ajudar nosso protagonista nessa jornada manguelística! Aviso: Cuidado com as patolas cortantes dos caranguejos protetores...eles não deixam qualquer um passar pelo santuário MangueBeat...prove que nosso explorador é merecedor dessa conquista!
 # 1. Título do Jogo💥: Uma Aventura MangueBeat
 
 # 2. Membros🚹:
@@ -14,15 +14,17 @@
 # 3. Arquitetura do Projeto🧱:
   ### O jogo foi desenvolvido com a biblioteca Pygame e estruturado em diferentes arquivos para melhor organização:
 
-- main.py: controla o funcionamento geral do jogo, contendo as instâncias principais de todos os outros arquivos do projeto.ooo
-- coletaveis.py: define a classe "Coletavel" para ser aplicada aos objetos que o player coleta durante o jogo.
-- colisoes.py: lida com o comportamento do player durante a interação física com os coletáveis e com os inimigos.oo
-- inimigo.py: define a movimentação e o comportamento do inimigo durante o jogo.o
-- mapas.py: programa a alternância entre os diferentes cenários de acordo com a movimentação do player.
-- player.py: define a classe player, programando a movimentação desse objeto através das teclas W, A, S e D.
-- tela_inicial.py: gera o plano de fundo inical do jogo, contendo os botões de "Iniciar" e de "Instruções" / importa a função "mostrar_instrucao()".
-- instrucoes.py: gera o plano de fundo de instruções, informandosobre os obejtivos e movimentação do player / estruturado a partir de uma função principal.
-- interface.py: registra a quantidade de coletáveis coletador pelo player / mostra na tela esse registro.    
+- main.py: controla o funcionamento geral do jogo, contendo as instâncias principais de todos os outros arquivos do projeto.
+- src.
+   - coletaveis.py: define a classe "Coletavel" para ser aplicada aos objetos que o player coleta durante o jogo.
+   - colisoes.py: lida com o comportamento do player durante a interação física com os coletáveis e com os inimigos.
+   - inimigo.py: define a movimentação e o comportamento do inimigo durante o jogo.
+   - mapas.py: programa a alternância entre os diferentes cenários de acordo com a movimentação do player.
+   - player.py: define a classe player, programando a movimentação desse objeto através das teclas W, A, S e D.
+   - tela_inicial.py: gera o plano de fundo inical do jogo, contendo os botões de "Iniciar" e de "Instruções" / importa a função "mostrar_instrucao()".
+   - instrucoes.py: gera o plano de fundo de instruções, informandosobre os obejtivos e movimentação do player / estruturado a partir de uma função principal.
+   - interface.py: registra a quantidade de coletáveis coletador pelo player / mostra na tela esse registro.
+   - tela_gameover.py: gera o plano de fundo do gameover para ser mostrado assim que o jogador perde suas vidas.   
 
 
 # 4. Capturas de Tela 📸:
@@ -40,20 +42,36 @@
 
 - Atualizando as sprites e o cenário / adicionando os coletáveis
 <img width="500" height="347" alt="Captura de Tela (464)" src="https://github.com/user-attachments/assets/15d7ba27-94ee-4ad9-b29a-d6d6f6243873" />
+
+- Tela Inicial
+<img width="500" height="403" alt="Captura de Tela (466)" src="https://github.com/user-attachments/assets/fe2eaebc-3930-4b1c-b0c7-33910bd08398" />
+
+- Tela Game Over
+<img width="500" height="403" alt="Captura de Tela (468)" src="https://github.com/user-attachments/assets/00c76d61-2edc-49fc-85b4-0341a19a90be" />
+
+- Tela do jogo oficial rodando
+<img width="500" height="403" alt="Captura de Tela (467)" src="https://github.com/user-attachments/assets/26eba75c-ae3d-4c9f-8f98-60d52f527961" />
+
+
     
 
 # 5. Ferramentas, bibliotecas e frameworks utilizados 🛠:
 ### Python 3.13.7
 ### Biblioteca Pygame : biblioteca principal usada para renderização, eventos e lógica do jogo.
 - O pygame possui uma ampla gama de informações de uso, além de lidar com os aspectos mais complexos de baixo nível, permitindo que você se concentre nos conceitos fundamentais de desenvolvimento de jogos, como game loop, detecção de colisão, gerenciamento de sprites e estados do jogo.
+### Pixabay
+- Usamos para baixar os áudios para a música de fundo e para os efeitos sonoros.
+### Canva
+- Usamos para editar os planos de fundo.
+
 
 # 6. Divisão de trabalho 📝:
   - Samuel: Fez o README, o tela_inicial.py e o instrucoes.py.
-  - Guilherme: Fez os mapas, colisões e suas lógicas
-  - Gabriel Brum: Fez os inimigos e a lógica de perseguição
-  - Gabriel Ribeiro: Fez o player.py e a movimentação do jogador
-  - Eduardo: Fez os Coletáveis, HUD e efeitos sonoros
-  - Thiago: Fez main_2.py, sprites do Sprites-possíveis, slides.
+  - Guilherme: Fez os mapas.py, colisoes.py e suas lógicas.
+  - Gabriel Brum: Fez os inimigos e a lógica de perseguição.
+  - Gabriel Ribeiro: Fez o player.py e a movimentação do jogador.
+  - Eduardo: Fez os Coletáveis, HUD, efeitos sonoros e o game_over.py.
+  - Thiago: Sprites do Sprites-possíveis e os slides.
 
 # 7. Conceitos de Programação utilizados 📚:
   - Programação Orientada a Objetos: Excluindo o arquivo main(), todos os outros arquivos possuem a definição de classes para instanciação no arquivo main().
@@ -74,7 +92,7 @@
 - Pygame instalado (pip install pygame).
 ### Instruções:
 - Acesse nosso código em nosso repositório github: https://github.com/safn007/Projeto-Final-IP---CC---2025.2.git
-- Use as teclas W, A, S, D para movimentar oplayer, fugir dos carangueijos defensores e coletar os itens.
+- Use as teclas W, A, S, D para movimentar oplayer, fugir dos caranguejos defensores e coletar os itens.
 
 ## BOM JOGO! SE DIVIRTA NESSA INCRÍVEL AVENTURA MANGUEBEAT!
 
