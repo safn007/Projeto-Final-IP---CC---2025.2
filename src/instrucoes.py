@@ -9,7 +9,7 @@ def mostrar_instrucao():
     pygame.init()
     LARGURA, ALTURA = 960, 640
     tela = pygame.display.set_mode((LARGURA, ALTURA))
-    pygame.display.set_caption("Tela de Instruções")
+    pygame.display.set_caption("Uma aventura Manguebeat")
 
     #plano de fundo
     try:

@@ -117,5 +117,5 @@ class Inimigo(pygame.sprite.Sprite):
                 if hasattr(player, 'vida'):
                     if player.vida != 0:
                         player.vida -= self.dano
-                        som_dano_recebido.play()
-                        print(f"Dano! Vida atual: {player.vida}")
+                        if player.vida > 0:
+                            som_dano_recebido.play()
