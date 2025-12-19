@@ -2,6 +2,9 @@ import pygame
 import math
 import os
 
+pygame.mixer.init()
+som_dano_recebido = pygame.mixer.Sound("Assets/Efeitos Sonoros/ough-47202.mp3")
+
 class Inimigo(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
@@ -112,5 +115,7 @@ class Inimigo(pygame.sprite.Sprite):
             if agora - self.ultimo_ataque > 1000: # 1 segundo de cooldown
                 self.ultimo_ataque = agora
                 if hasattr(player, 'vida'):
-                    player.vida -= self.dano
-                    print(f"Dano! Vida atual: {player.vida}")
+                    if player.vida != 0:
+                        player.vida -= self.dano
+                        som_dano_recebido.play()
+                        print(f"Dano! Vida atual: {player.vida}")
