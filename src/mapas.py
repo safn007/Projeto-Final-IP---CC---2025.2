@@ -24,7 +24,7 @@ class Mapas:
         self.mapa5_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_5_arvores.png')).convert_alpha()
         self.mapa6_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_6_arvores.png')).convert_alpha()
 
-        self.mapa_4_cerca = pygame.image.load(os.path.join(imagens_path, 'mapa_4_cerca.png'))
+        self.mapa_4_cerca = pygame.image.load(os.path.join(imagens_path, 'mapa_4_cerca.png')).convert_alpha()
 
         self.mapa1 = pygame.transform.scale(self.mapa1, (largura, altura))
         self.mapa2 = pygame.transform.scale(self.mapa2, (largura, altura))

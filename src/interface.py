@@ -7,16 +7,16 @@ class interface():
         self.fonte_menor = pygame.font.Font('Assets/Fontes/MONOCRAFT.TTC', 12)
         
         # Carrega as Imagens dos ícones
-        img_chapeu = pygame.image.load('Assets/Imagens/Chapeu-Chico-Science.png')
+        img_chapeu = pygame.image.load('Assets/Imagens/Chapeu-Chico-Science.png').convert_alpha()
         self.icone_chapeu = pygame.transform.scale(img_chapeu, (39, 31.5))
 
-        img_oculos = pygame.image.load('Assets/Imagens/Oculos-Chico-Science.png')
+        img_oculos = pygame.image.load('Assets/Imagens/Oculos-Chico-Science.png').convert_alpha()
         self.icone_oculos = pygame.transform.scale(img_oculos, (48, 24))
 
-        img_carangueijo = pygame.image.load('Assets/Imagens/Pata-Carangueijo.png')
+        img_carangueijo = pygame.image.load('Assets/Imagens/Pata-Carangueijo.png').convert_alpha()
         self.icone_carangueijo = pygame.transform.scale(img_carangueijo, (25.5, 48))
 
-        img_vida = pygame.image.load('Assets/Imagens/vida-jogador.png')
+        img_vida = pygame.image.load('Assets/Imagens/vida-jogador.png').convert_alpha()
         self.icone_vida = pygame.transform.scale(img_vida, (33, 31.5))
 
         # Cores

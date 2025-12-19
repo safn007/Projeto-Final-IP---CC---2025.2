@@ -14,10 +14,10 @@ tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption("Uma aventura Manguebeat")
 
 #imagem do fundo
-imagem_fundo = pygame.image.load(os.path.join(imagens_path, 'Tela-Gameover.png'))
+imagem_fundo = pygame.image.load(os.path.join(imagens_path, 'Tela-Gameover.png')).convert()
 imagem_fundo = pygame.transform.scale(imagem_fundo, (LARGURA, ALTURA))
 
-imagem_vitoria = pygame.image.load(os.path.join(imagens_path, 'Tela-vitoria.png'))
+imagem_vitoria = pygame.image.load(os.path.join(imagens_path, 'Tela-vitoria.png')).convert()
 imagem_vitoria = pygame.transform.scale(imagem_vitoria, (LARGURA, ALTURA))
 
 # Cores

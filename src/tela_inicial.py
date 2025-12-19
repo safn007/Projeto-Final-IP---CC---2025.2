@@ -14,7 +14,7 @@ tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption("Uma aventura Manguebeat")
 
 #imagem do fundo
-imagem_fundo = pygame.image.load(os.path.join(imagens_path, 'plano_de_fundo_tela_inicial.webp'))
+imagem_fundo = pygame.image.load(os.path.join(imagens_path, 'plano_de_fundo_tela_inicial.webp')).convert()
 imagem_fundo = pygame.transform.scale(imagem_fundo, (LARGURA, ALTURA))
 
 # Cores
