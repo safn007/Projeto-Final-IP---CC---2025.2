@@ -23,7 +23,7 @@ mapas = Mapas(largura, altura)
 tela = pygame.display.set_mode((largura, altura)) # Define o tamanho da janela do jogo
 pygame.display.set_caption("Nome do jogo") # Nome que aparece no título da janela
 
-player = Player(250, 250)
+player = Player(230, 250)
 player.vida = 3 # Começa com 3 corações
 
 # variaveis para contagem de coletaveis
@@ -31,8 +31,7 @@ qnt_chapeu = 0
 qnt_oculos = 0
 qnt_carangueijo = 0
 
-
-chapeu_coletado = oculos_coletado = coracao_coletado = c1_coletado = c2_coletado = c3_coletado = False
+chapeu_coletado = oculos_coletado = coracao1_coletado = coracao2_coletado = c1_coletado = c2_coletado = c3_coletado = False
 
 # Grupo de sprites
 sprites_group = pygame.sprite.Group()
@@ -58,12 +57,12 @@ while running_game:
             running_game = False
 
     # Lógica de Game Over 
-    if player.vida <= 0:
+    if player.vida <= -10000:
         print("GAME OVER")
         running_game = False
 
     # desenha mapa
-    pos_coletaveis = mapas.desenhar(tela, chapeu_coletado, oculos_coletado, coracao_coletado,c1_coletado, c2_coletado, c3_coletado)
+    pos_coletaveis = mapas.desenhar(tela, chapeu_coletado, oculos_coletado, coracao1_coletado, coracao2_coletado, c1_coletado, c2_coletado, c3_coletado)
 
     # troca de mapa/ inicializa colisões e inimigos
     mapa_antigo = mapas.mapa_atual
@@ -73,7 +72,7 @@ while running_game:
         # coletar colisões
         atual = mapas.mapa_atual
         colisoes = Colisoes([])
-        colisoes = colisoes.lista_colisoes(atual)
+        colisoes = colisoes.lista_colisoes(atual, chapeu_coletado, oculos_coletado)
         player.colisoes = colisoes  
 
         pos_inimigos = mapas.get_inimigos()
@@ -83,16 +82,31 @@ while running_game:
             inimigo = Inimigo(pos[0], pos[1])
             grupo_inimigos.add(inimigo)
 
+    # aumentar velocidade de acordo com numero de patas
+    if qnt_carangueijo == 1:
+        player.speed = 3.5
+    if qnt_carangueijo == 2:
+        player.speed = 4
+    if qnt_carangueijo == 3:
+        player.speed = 4.5
+
     # lógica de coleta de itenssss
     for item in pos_coletaveis:
         if player.hitbox.colliderect(item.rect):
             item.kill() # remove o item do jogo e do grupo
             
             som_coletando_itens.play()
-            if item.tipo == "coracao":
+            if item.tipo == "coracao1":
                 print("pegou vida") 
-                player.vida += 1
-                coracao_coletado = True
+                if player.vida < 3: 
+                    player.vida += 1
+                coracao1_coletado = True
+
+            if item.tipo == "coracao2":
+                print("pegou vida")
+                if player.vida < 3:  
+                    player.vida += 1
+                coracao2_coletado = True
             
             elif item.tipo == "chapeu":
                 print("pegou chapeu")
