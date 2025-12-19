@@ -2,7 +2,6 @@
 import pygame
 from src.mapas import Mapas
 from src.colisoes import Colisoes
-from src.coletaveis import Coletavel
 from src.player import Player
 from src.inimigo import Inimigo 
 from src.interface import interface
