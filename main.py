@@ -32,7 +32,7 @@ qnt_oculos = 0
 qnt_carangueijo = 0
 
 
-coletado = chapeu_coletado = oculos_coletado = coracao_coletado = c1_coletado = c2_coletado = c3_coletado = False
+chapeu_coletado = oculos_coletado = coracao_coletado = c1_coletado = c2_coletado = c3_coletado = False
 
 # Grupo de sprites
 sprites_group = pygame.sprite.Group()
@@ -63,13 +63,12 @@ while running_game:
         running_game = False
 
     # desenha mapa
-    pos_coletaveis = mapas.desenhar(tela, coletado, chapeu_coletado, oculos_coletado, coracao_coletado,c1_coletado, c2_coletado, c3_coletado)
+    pos_coletaveis = mapas.desenhar(tela, chapeu_coletado, oculos_coletado, coracao_coletado,c1_coletado, c2_coletado, c3_coletado)
 
     # troca de mapa/ inicializa colisões e inimigos
     mapa_antigo = mapas.mapa_atual
     mapas.trocar_mapa(player)
-    if mapa_antigo != mapas.mapa_atual or inicializar == True:
-        coletado = False       
+    if mapa_antigo != mapas.mapa_atual or inicializar == True:  
         inicializar = False
         # coletar colisões
         atual = mapas.mapa_atual
@@ -98,31 +97,26 @@ while running_game:
             elif item.tipo == "chapeu":
                 print("pegou chapeu")
                 qnt_chapeu+=1
-                coletado = True
                 chapeu_coletado = True
 
             elif item.tipo == "oculos":
                 print("pegou oculos")
                 qnt_oculos+=1
-                coletado = True
                 oculos_coletado = True
 
             elif item.tipo == "carangueijo1":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
-                coletado = True
                 c1_coletado = True
 
             elif item.tipo == "carangueijo2":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
-                coletado = True
                 c2_coletado = True
 
             elif item.tipo == "carangueijo3":
                 print("pegou carangueijo")
                 qnt_carangueijo+=1
-                coletado = True
                 c3_coletado = True
 
     # DESCOMENTAR PARA TESTE DE COLISÕES

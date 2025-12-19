@@ -63,12 +63,12 @@ class Mapas:
         return pos_inimigos
 
     # retorna a posição dos itens e dos objetos
-    def desenhar(self, tela, coletado, chapeu_coletado, oculos_coletado, coracao_coletado, c1_coletado, c2_coletado, c3_coletado):
+    def desenhar(self, tela, chapeu_coletado, oculos_coletado, coracao_coletado, c1_coletado, c2_coletado, c3_coletado):
         grupo_coletaveis = pygame.sprite.Group()
 
         if self.mapa_atual == 1:
             # posiciona os coletáveis
-            if coletado == False and chapeu_coletado == False:
+            if chapeu_coletado == False:
                 grupo_coletaveis.add(Coletavel("chapeu", 100, 100))
 
             # desenha o mapa
@@ -76,10 +76,10 @@ class Mapas:
 
         elif self.mapa_atual == 2:
             # posiciona os coletáveis
-            if coletado == False and oculos_coletado == False:
+            if oculos_coletado == False:
                 grupo_coletaveis.add(Coletavel("oculos", 150, 100))
 
-            if coletado == False and coracao_coletado == False:
+            if coracao_coletado == False:
                 grupo_coletaveis.add(Coletavel("coracao", 300, 100))
             
             # desenha o mapa
@@ -87,7 +87,7 @@ class Mapas:
         
         elif self.mapa_atual == 3:
             # posiciona os coletáveis 
-            if coletado == False and c1_coletado == False:
+            if c1_coletado == False:
                 grupo_coletaveis.add(Coletavel("carangueijo1", 600, 500))
 
             # desenha o mapa
@@ -95,17 +95,17 @@ class Mapas:
         
         elif self.mapa_atual == 4:
             # posiciona os coletáveis
-            if coletado == False and c2_coletado == False:
+            if c2_coletado == False:
                 grupo_coletaveis.add(Coletavel("carangueijo2", 300, 500))
 
-            #if coletado == False and coracao_coletado == False:
+            #if coracao_coletado == False:
                 #grupo_coletaveis.add(Coletavel("coracao", 100, 100))
             # desenha o mapa
             tela.blit(self.mapa4, (0, 0))
 
         elif self.mapa_atual == 5:
             # posiciona os coletáveis
-            if coletado == False and c3_coletado == False:
+            if c3_coletado == False:
                 grupo_coletaveis.add(Coletavel("carangueijo3", 300, 500))
 
             # desenha o mapa
