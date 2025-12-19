@@ -5,20 +5,26 @@ class Colisoes:
         self.blocks = blocks
 
     # define posições das caixas de colisao
-    def coletar_coords(self, matriz):
-        lista = []
-        for i in range(20):
-            for j in range(30):
-                if matriz[i][j] == 1:
-                    coord = (i, j*32)
-                    lista.append(coord)
-        
-        return lista
+    def coletar_xy(self, num):
+        num -= 1
+        x = num % 30
+        y = int(num / 30)
+        return (x * 32, y * 32)
+
+    # recebe coordenadas da lista de colisões
+    def criar_colisoes(self, lista_colisoes):
+        coords = []
+
+        for block in lista_colisoes:
+            coord = self.coletar_xy(block)
+            coords.append(coord)
+
+        return coords
 
     # cria as caixas de colisão
     def lista_colisoes(self, mapa_atual, chapeu_coletado, oculos_coletado):
         colisoes_base = self.get_colisoes(mapa_atual, chapeu_coletado, oculos_coletado)
-        colisoes = self.coletar_coords(colisoes_base)
+        colisoes = self.criar_colisoes(colisoes_base)
         lista_colisoes = []
         for coord in colisoes:
             colisao = pygame.Rect(coord[0], coord[1], 32, 32)
@@ -190,4 +196,16 @@ class Colisoes:
             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0]]
 
+        colisoes = self.transformar_num(colisoes)
         return colisoes
+
+    # transforma a matriz em números
+    def transformar_num(self, matriz):
+        lista = []
+        for i in range(20):
+            for j in range(30):
+                if matriz[i][j] == 1:
+                    num = 1 + (30*i) + j
+                    lista.append(num)
+
+        return lista
