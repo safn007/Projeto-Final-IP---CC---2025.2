@@ -2,17 +2,16 @@ import pygame
 import os
 import sys
 
+pygame.init()
+
 pygame.mixer.init()
 som_clique = pygame.mixer.Sound("Assets/Efeitos Sonoros/computer-mouse-click-352734.mp3")
-som_trilha_sonora = pygame.mixer.music.load("Assets/Efeitos Sonoros/Chico_Science_Na_o_Zumbi_-_Bai_o_Ambiental_(mp3.pm).mp3")
 imagens_path = os.path.join("Assets", "Imagens")
-
-pygame.init()
 
 # Configurações da Janela
 LARGURA, ALTURA = 960, 640
 tela = pygame.display.set_mode((LARGURA, ALTURA))
-pygame.display.set_caption("Meu Jogo - Tela Inicial")
+pygame.display.set_caption("Uma aventura Manguebeat")
 
 #imagem do fundo
 imagem_fundo = pygame.image.load(os.path.join(imagens_path, 'Tela-Gameover.png'))

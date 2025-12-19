@@ -119,4 +119,3 @@ class Inimigo(pygame.sprite.Sprite):
                         player.vida -= self.dano
                         if player.vida > 0:
                             som_dano_recebido.play()
-                        print(f"Dano! Vida atual: {player.vida}")

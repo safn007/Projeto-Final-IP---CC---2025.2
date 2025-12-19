@@ -12,7 +12,7 @@ pygame.init()
 # Configurações da Janela
 LARGURA, ALTURA = 960, 640
 tela = pygame.display.set_mode((LARGURA, ALTURA))
-pygame.display.set_caption("Meu Jogo - Tela Inicial")
+pygame.display.set_caption("Uma aventura Manguebeat")
 
 #imagem do fundo
 imagem_fundo = pygame.image.load(os.path.join(imagens_path, 'plano_de_fundo_tela_inicial.webp'))
