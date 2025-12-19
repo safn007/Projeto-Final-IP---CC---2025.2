@@ -48,7 +48,9 @@ class Mapas:
     # define a posição dos inimigos dependendo do mapa
     def get_inimigos(self):
         if self.mapa_atual == 1:
-            pos_inimigos = []
+            pos_inimigos = [
+                (626, 526)
+            ]
 
         elif self.mapa_atual == 2:
             pos_inimigos = [
@@ -60,7 +62,8 @@ class Mapas:
         elif self.mapa_atual == 3:
             pos_inimigos = [
                 (300, 200),
-                (625, 500)
+                (625, 500),
+                (657, 205)
             ]
 
         elif self.mapa_atual == 4:
