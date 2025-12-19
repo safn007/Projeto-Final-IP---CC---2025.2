@@ -4,7 +4,6 @@ import sys
 
 pygame.mixer.init()
 som_clique = pygame.mixer.Sound("Assets/Efeitos Sonoros/computer-mouse-click-352734.mp3")
-som_trilha_sonora = pygame.mixer.music.load("Assets/Efeitos Sonoros/Chico_Science_Na_o_Zumbi_-_Bai_o_Ambiental_(mp3.pm).mp3")
 imagens_path = os.path.join("Assets", "Imagens")
 
 pygame.init()
@@ -36,9 +35,13 @@ def desenhar_texto(texto, fonte, cor, x, y):
     tela.blit(img, rect)
 
 
-pygame.mixer.music.play(-1) # Toca em loop infinito
+
 
 def menu_principal():
+
+    som_trilha_sonora = pygame.mixer.music.load("Assets/Efeitos Sonoros/Chico_Science_Na_o_Zumbi_-_Bai_o_Ambiental_(mp3.pm).mp3")
+    pygame.mixer.music.play(-1) # Toca em loop infinito
+    
     rodando = True
     while rodando:
 

@@ -6,7 +6,6 @@ pygame.init()
 
 pygame.mixer.init()
 som_clique = pygame.mixer.Sound("Assets/Efeitos Sonoros/computer-mouse-click-352734.mp3")
-som_trilha_sonora = pygame.mixer.music.load("Assets/Efeitos Sonoros/Chico_Science_Na_o_Zumbi_-_Bai_o_Ambiental_(mp3.pm).mp3")
 imagens_path = os.path.join("Assets", "Imagens")
 
 # Configurações da Janela
@@ -18,7 +17,7 @@ pygame.display.set_caption("Uma aventura Manguebeat")
 imagem_fundo = pygame.image.load(os.path.join(imagens_path, 'Tela-Gameover.png'))
 imagem_fundo = pygame.transform.scale(imagem_fundo, (LARGURA, ALTURA))
 
-imagem_vitoria = imagem_fundo = pygame.image.load(os.path.join(imagens_path, 'Tela-vitoria.png'))
+imagem_vitoria = pygame.image.load(os.path.join(imagens_path, 'Tela-vitoria.png'))
 imagem_vitoria = pygame.transform.scale(imagem_vitoria, (LARGURA, ALTURA))
 
 # Cores
@@ -33,14 +32,13 @@ fonte_titulo = pygame.font.SysFont("Arial", 64, bold=True)
 fonte_subtitulo = pygame.font.SysFont("Arial", 54, bold=True)
 fonte_botao = pygame.font.SysFont("Arial", 32)
 
-pygame.mixer.music.play(-1)
-
 def desenhar_texto(texto, fonte, cor, x, y):
     img = fonte.render(texto, True, cor)
     rect = img.get_rect(center=(x, y))
     tela.blit(img, rect)
 
 def tela_game_over():
+
     rodando = True
     while rodando:
         
@@ -69,6 +67,10 @@ def tela_game_over():
         pygame.display.update()
 
 def tela_vitoria():
+
+    som_trilha_vitoria = pygame.mixer.music.load("Assets/Efeitos Sonoros/Chico_Science_Na_o_Zumbi_-_A_Praieira_1994_(mp3.pm)-[AudioTrimmer.com].mp3")
+    pygame.mixer.music.play(-1)
+    
     rodando = True
     while rodando:
         
@@ -79,7 +81,7 @@ def tela_vitoria():
         mouse_pos = pygame.mouse.get_pos()
 
         # 4. Definição dos Retângulos dos Botões
-        btn_sair = pygame.Rect(LARGURA // 2 - 110, ALTURA // 2 + 80, 230, 50)
+        btn_sair = pygame.Rect(LARGURA // 2 - 115, ALTURA // 2 + 245, 230, 50)
 
         # 7. Tratamento de Eventos
         for evento in pygame.event.get():
