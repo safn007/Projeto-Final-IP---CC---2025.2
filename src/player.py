@@ -1,6 +1,8 @@
 import pygame
 import os
 
+pygame.mixer.init()
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
@@ -11,6 +13,13 @@ class Player(pygame.sprite.Sprite):
         self.facing = "down" # Guarda a ultima direcao
         self.status = "idle_down" # Comeca para baixo
         
+        self.som_passo = pygame.mixer.Sound("Assets/Efeitos Sonoros/walking-on-grass-363353.mp3") #som do passo
+        self.som_passo.set_volume(0.3) # Volume do passo
+
+        # Variável para controlar o ritmo
+        self.tempo_ultimo_passo = 0
+        self.intervalo_passos = 550 # Milissegundos entre cada passo 
+
         # Carrega as imagens
         self.animations = {
             "idle_up": [], "run_up": [],
@@ -89,24 +98,37 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
         self.direction.x = 0
         self.direction.y = 0
-        
+
+        agora = pygame.time.get_ticks()
+        andando = False
+
         # Movimento e definicao de onde olha
         if keys[pygame.K_w]:
             self.direction.y -= 1
             self.facing = "up"
+            andando = True
         elif keys[pygame.K_s]:
             self.direction.y += 1
             self.facing = "down"
+            andando = True
         elif keys[pygame.K_a]:
             self.direction.x -= 1
             self.facing = "left"
+            andando = True
         elif keys[pygame.K_d]:
             self.direction.x += 1
             self.facing = "right"
+            andando = True
             
         # Faz nao andar mais rapido na diagonal
         if self.direction.length() > 0:
             self.direction = self.direction.normalize()
+
+        if andando:
+            # Se já passou tempo suficiente desde o último som
+            if agora - self.tempo_ultimo_passo > self.intervalo_passos:
+                self.tempo_ultimo_passo = agora
+                self.som_passo.play()
             
     def animate(self):
         animation = self.animations[self.status]

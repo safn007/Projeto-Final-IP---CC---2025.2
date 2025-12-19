@@ -2,6 +2,8 @@ import pygame
 import os
 images_path_base = os.path.join("Assets", "Imagens")
 
+pygame.mixer.init()
+som_clique = pygame.mixer.Sound("Assets/Efeitos Sonoros/computer-mouse-click-352734.mp3")
 
 def mostrar_instrucao():
     pygame.init()
@@ -35,6 +37,7 @@ def mostrar_instrucao():
         for evento in pygame.event.get():
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if botao_rect.collidepoint(mouse_pos):
+                    som_clique.play()
                     return
 
         pygame.display.flip()

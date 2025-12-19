@@ -16,6 +16,10 @@ pygame.mixer.init()
 
 #baixando os efeitos sonoros
 som_coletando_itens = pygame.mixer.Sound("Assets/Efeitos Sonoros/game-start-317318.mp3")
+som_gameover = pygame.mixer.Sound("Assets/Efeitos Sonoros/falled-sound-effect-278635.mp3")
+alerta_vitoria = pygame.mixer.Sound("Assets/Efeitos Sonoros/winner-game-sound-404167.mp3")
+som = True # Variavel para o efeito ser reproduzido apenas uma vez
+vitoria = False # mesmo principio de funcionamento de som
 
 largura = 960
 altura = 640
@@ -57,8 +61,9 @@ while running_game:
 
     # Lógica de Game Over 
     if player.vida <= 0:
-        print("GAME OVER")
-        running_game = False
+        if som:
+            som = False
+            som_gameover.play()
 
     # desenha mapa
     pos_coletaveis = mapas.desenhar(tela, coletado, chapeu_coletado, oculos_coletado, c1_coletado, c2_coletado, c3_coletado)
@@ -118,6 +123,11 @@ while running_game:
                 qnt_carangueijo+=1
                 coletado = True
                 c3_coletado = True
+
+    if chapeu_coletado and oculos_coletado and not vitoria:
+        alerta_vitoria.play()
+        vitoria = True
+        
 
     # DESCOMENTAR PARA TESTE DE COLISÕES
     # for coord in colisoes:
