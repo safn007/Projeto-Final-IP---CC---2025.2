@@ -63,7 +63,7 @@ class Mapas:
         return pos_inimigos
 
     # retorna a posição dos itens e dos objetos
-    def desenhar(self, tela, coletado, chapeu_coletado, oculos_coletado, c1_coletado, c2_coletado, c3_coletado):
+    def desenhar(self, tela, coletado, chapeu_coletado, oculos_coletado, coracao_coletado, c1_coletado, c2_coletado, c3_coletado):
         grupo_coletaveis = pygame.sprite.Group()
 
         if self.mapa_atual == 1:
@@ -79,6 +79,9 @@ class Mapas:
             if coletado == False and oculos_coletado == False:
                 grupo_coletaveis.add(Coletavel("oculos", 150, 100))
 
+            if coletado == False and coracao_coletado == False:
+                grupo_coletaveis.add(Coletavel("coracao", 300, 100))
+            
             # desenha o mapa
             tela.blit(self.mapa2, (0, 0))
         
@@ -95,6 +98,8 @@ class Mapas:
             if coletado == False and c2_coletado == False:
                 grupo_coletaveis.add(Coletavel("carangueijo2", 300, 500))
 
+            #if coletado == False and coracao_coletado == False:
+                #grupo_coletaveis.add(Coletavel("coracao", 100, 100))
             # desenha o mapa
             tela.blit(self.mapa4, (0, 0))
 
