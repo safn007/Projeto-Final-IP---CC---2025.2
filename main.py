@@ -16,6 +16,7 @@ pygame.mixer.init()
 
 #baixando os efeitos sonoros
 som_coletando_itens = pygame.mixer.Sound("Assets/Efeitos Sonoros/game-start-317318.mp3")
+som_coletando_patas = pygame.mixer.Sound("Assets/Efeitos Sonoros/high-speed-02-192899.mp3")
 som_gameover = pygame.mixer.Sound("Assets/Efeitos Sonoros/falled-sound-effect-278635.mp3")
 alerta_vitoria = pygame.mixer.Sound("Assets/Efeitos Sonoros/winner-game-sound-404167.mp3")
 som = True # Variavel para o efeito ser reproduzido apenas uma vez
@@ -100,7 +101,10 @@ while running_game:
         if player.hitbox.colliderect(item.rect):
             item.kill() # remove o item do jogo e do grupo
             
-            som_coletando_itens.play()
+            if "carangueijo" in item.tipo:
+                som_coletando_patas.play()
+            else:
+                som_coletando_itens.play()
             if item.tipo == "coracao1":
                 print("pegou vida") 
                 if player.vida < 3: 
