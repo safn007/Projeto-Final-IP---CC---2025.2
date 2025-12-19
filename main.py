@@ -141,7 +141,10 @@ while running_game:
     if chapeu_coletado and oculos_coletado and not vitoria:
         alerta_vitoria.play()
         vitoria = True
-        
+
+    # criar retangulo da vitoria
+    if mapas.mapa_atual == 6:
+        vitoria = pygame.Rect(450, 350, 32, 32)
 
     # DESCOMENTAR PARA TESTE DE COLISÕES
     # for coord in colisoes:
