@@ -10,19 +10,19 @@ class Mapas:
         self.altura = altura
 
         # carrega os mapas
-        self.mapa1 = pygame.image.load(os.path.join(imagens_path, 'mapa_1.png'))
-        self.mapa2 = pygame.image.load(os.path.join(imagens_path, 'mapa_2.png'))
-        self.mapa3 = pygame.image.load(os.path.join(imagens_path, 'mapa_3.png'))
-        self.mapa4 = pygame.image.load(os.path.join(imagens_path, 'mapa_4.png'))
-        self.mapa5 = pygame.image.load(os.path.join(imagens_path, 'mapa_5.png'))
-        self.mapa6 = pygame.image.load(os.path.join(imagens_path, 'mapa_6.png'))
+        self.mapa1 = pygame.image.load(os.path.join(imagens_path, 'mapa_1.png')).convert()
+        self.mapa2 = pygame.image.load(os.path.join(imagens_path, 'mapa_2.png')).convert()
+        self.mapa3 = pygame.image.load(os.path.join(imagens_path, 'mapa_3.png')).convert()
+        self.mapa4 = pygame.image.load(os.path.join(imagens_path, 'mapa_4.png')).convert()
+        self.mapa5 = pygame.image.load(os.path.join(imagens_path, 'mapa_5.png')).convert()
+        self.mapa6 = pygame.image.load(os.path.join(imagens_path, 'mapa_6.png')).convert()
 
-        self.mapa1_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_1_arvores.png'))
-        self.mapa2_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_2_arvores.png'))
-        self.mapa3_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_3_arvores.png'))
-        self.mapa4_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_4_arvores.png'))
-        self.mapa5_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_5_arvores.png'))
-        self.mapa6_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_6_arvores.png'))
+        self.mapa1_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_1_arvores.png')).convert_alpha()
+        self.mapa2_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_2_arvores.png')).convert_alpha()
+        self.mapa3_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_3_arvores.png')).convert_alpha()
+        self.mapa4_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_4_arvores.png')).convert_alpha()
+        self.mapa5_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_5_arvores.png')).convert_alpha()
+        self.mapa6_arvores = pygame.image.load(os.path.join(imagens_path, 'mapa_6_arvores.png')).convert_alpha()
 
         self.mapa_4_cerca = pygame.image.load(os.path.join(imagens_path, 'mapa_4_cerca.png'))
 

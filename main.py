@@ -81,7 +81,6 @@ while running_game:
         atual = mapas.mapa_atual
         colisoes = Colisoes([])
         colisoes = colisoes.lista_colisoes(atual, chapeu_coletado, oculos_coletado)
-        player.colisoes = colisoes  
 
         pos_inimigos = mapas.get_inimigos()
         grupo_inimigos = pygame.sprite.Group() 
@@ -89,6 +88,8 @@ while running_game:
             # Cria um inimigo para cada posição e adiciona ao grupo
             inimigo = Inimigo(pos[0], pos[1])
             grupo_inimigos.add(inimigo)
+        
+        player.colisoes = colisoes  
 
     # aumentar velocidade de acordo com numero de patas
     if qnt_carangueijo == 1:
